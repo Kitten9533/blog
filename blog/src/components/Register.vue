@@ -44,9 +44,11 @@
       },
       methods: {
         register () {
+          console.log('register')
+          console.log(this.$http)
           this.$http.get('/api/register')
-            .then((response) => {
-              console.log(response)
+            .then(function (res) {
+              console.log(res)
             })
         }
       }

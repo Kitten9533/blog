@@ -5,9 +5,6 @@
   </div>
 </template>
 
-<!-- <script src="../assets/js/jquery.min.js"></script> -->
-<!-- <script src="../assets/js/bootstrap.min.js?v=3.3.6"></script> -->
-<!-- <script src="../assets/js/plugins/iCheck/icheck.min.js"></script> -->
 <script>
 export default {
   name: 'app'
