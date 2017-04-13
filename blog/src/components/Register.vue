@@ -8,12 +8,12 @@
             </div>
             <h3>欢迎注册 BLOG</h3>
             <p>创建一个新账户</p>
-            <form class="m-t" role="form" action="http://localhost:3000/server_register">
+            <form class="m-t" role="form" action="#">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="请输入用户名" required="">
+                    <input name="username" type="text" class="form-control" placeholder="请输入用户名" required="" v-model="username">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="请输入密码" required="">
+                    <input name="password" type="password" class="form-control" placeholder="请输入密码" required="" v-model="password">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="请再次输入密码" required="">
@@ -24,7 +24,7 @@
                             <input type="checkbox" class="input-chk"><i></i> <p class="chk-span">我同意注册协议</p></label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary block full-width m-b">注 册</button>
+                <button type="button" class="btn btn-primary block full-width m-b" @click="register">注 册</button>
 
                 <p class="text-muted text-center"><small>已经有账户了？</small><a href="login.html">点此登录</a>
                 </p>
@@ -33,6 +33,25 @@
         </div>
     </div>
 </template>
+
+<script>
+    export default{
+      data () {
+        return {
+          username: '',
+          password: ''
+        }
+      },
+      methods: {
+        register () {
+          this.$http.get('/api/register')
+            .then((response) => {
+              console.log(response)
+            })
+        }
+      }
+    }
+</script>
 
 <style>
     @import "../assets/css/bootstrap.min14ed.css?v=3.3.6";
