@@ -18,7 +18,9 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
   </div> -->
-  <div>BLOG</div>
+  <div><p>BLOG</p>
+    <a href='/#/register'>注册</a>
+  </div>
 </template>
 
 <script>

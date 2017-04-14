@@ -45,10 +45,27 @@
       methods: {
         register () {
           console.log('register')
-          console.log(this.$http)
-          this.$http.get('/api/register')
-            .then(function (res) {
-              console.log(res)
+          this.$http.get('/api/registerAccout')
+            .then((response) => {
+              // 响应成功
+              let param = {
+                username: this.username,
+                password: this.password
+              }
+              this.$http.post('/api/registerAccout', param)
+                .then((response) => {
+                  this.$router.push({'name': 'Hello'})
+                })
+                .catch((reject) => {
+                  alert('注册失败')
+                  console.log(reject)
+                })
+            })
+            .then((response) => {
+              console.log(response)
+            })
+            .catch((reject) => {
+              console.log(reject)
             })
         }
       }
