@@ -1,5 +1,5 @@
 // 编写接口
-"use strict";
+// "use strict";
 const models = require('./db');
 const express = require('express');
 const router = express.Router();
@@ -17,22 +17,23 @@ router.post('/api/registerAccout',(req,res) => {
     // 查询用户是否存在
     models.User.findOne({'username': req.body.username}, (err,doc) => {
       if (err){
-        res.send(500);
+        res.sendStatus(500);
         req.session.error = '网络异常错误';
-        console.log(err);
+        console.log('网络异常错误');
       }
       else if (doc) {// 用户不存在 可以注册
         req.session.error = '用户名已存在';
-        req.send(500);
+        res.sendStatus(200);
+        console.log('用户名已存在')
       }
       else {
         newUser.save((err,data) => {
           if (err) {
-            res.send(500);
+            res.sendStatus(500);
             console.log(err);
           } else {
             req.session.error = '用户创建成功';
-            res.send(200);
+            res.sendStatus(200);
             console.log('registerAccout successed');
           }
         })

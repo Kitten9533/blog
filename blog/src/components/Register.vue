@@ -54,7 +54,9 @@
               }
               this.$http.post('/api/registerAccout', param)
                 .then((response) => {
+                  alert('注册成功')
                   this.$router.push({'name': 'Hello'})
+                  console.log(response)
                 })
                 .catch((reject) => {
                   alert('注册失败')
@@ -71,6 +73,7 @@
       }
     }
 </script>
+
 
 <style>
     @import "../assets/css/bootstrap.min14ed.css?v=3.3.6";
