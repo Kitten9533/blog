@@ -20,6 +20,7 @@
   </div> -->
   <div><p>BLOG</p>
     <a href='/#/register'>注册</a>
+    <h4><a href='/#/blog'>进入博客</a></h4>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-	<div class="middle-box text-center loginscreen   animated fadeInDown">
+	<div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
             <div>
 
@@ -76,12 +76,6 @@
 
 
 <style>
-    @import "../assets/css/bootstrap.min14ed.css?v=3.3.6";
-    @import "../assets/css/bootstrap.min.css";
-    @import "../assets/css/plugins/iCheck/custom.css";
-    @import "../assets/css/animate.min.css";
-    @import "../assets/css/style.min862f.css?v=4.1.0";
-    @import "../assets/css/font-awesome.min93e3.css?v=4.4.0";
     .input-chk{
     	width:18px;height:18px;
     	margin-left:0 !important;

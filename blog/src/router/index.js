@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import Register from '@/components/Register'
+import Blog from '@/components/Blog'
 import VueResource from 'vue-resource'
 
 Vue.use(VueResource)
@@ -19,6 +20,11 @@ const router = new Router({
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/blog',
+      name: 'Blog',
+      component: Blog
     }
   ]
 })
