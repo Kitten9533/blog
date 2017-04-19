@@ -9,15 +9,25 @@ mongoose.connect('mongodb://localhost/blog');
 const db = mongoose.connection;
 db.once('error',() => console.log('Mongo connection error'));
 db.once('open',() => console.log('Mongo connection successed'));
-/************** 定义模式loginSchema **************/
+/************** 定义模式UserSchema **************/
 const UserSchema = mongoose.Schema({
     username : String,
     password : String
 });
+const BlogSchema = mongoose.Schema({
+	title : String,
+	url : String,
+	summary : String,
+	author : String,
+	time : String,
+	comment : String,
+	article_view : String
+});
 
 /************** 定义模型Model **************/
 const Models = {
-    User : mongoose.model('User',UserSchema)
+    User : mongoose.model('User',UserSchema),
+    Blog : mongoose.model('Blog',BlogSchema)
 }
 
 module.exports = Models;
