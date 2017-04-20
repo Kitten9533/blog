@@ -63,9 +63,6 @@
                   console.log(reject)
                 })
             })
-            .then((response) => {
-              console.log(response)
-            })
             .catch((reject) => {
               console.log(reject)
             })

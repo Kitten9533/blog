@@ -57,6 +57,19 @@ router.get('/',(req,res) => {
     res.writeHead(200,{'Content-Type':'text/html'});
     res.write("register");
     res.end();
-})
+});
+
+router.get('/api/getBlogList',(req,res) => {
+  models.Blog.find((err,data) => {
+    if(err){
+      res.sendStatus(500);
+    }
+    else{
+      //console.log(data);
+      res.json(data);
+      res.end();
+    }
+  });
+});
 
 module.exports = router;
