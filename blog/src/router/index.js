@@ -4,6 +4,7 @@ import Hello from '@/components/Hello'
 import Register from '@/components/Register'
 import Blog from '@/components/Blog'
 import VueResource from 'vue-resource'
+import Index from '@/components/Index'
 
 Vue.use(VueResource)
 Vue.use(Router)
@@ -25,6 +26,11 @@ const router = new Router({
       path: '/blog',
       name: 'Blog',
       component: Blog
+    },
+    {
+      path: '/index',
+      name: '/Index',
+      component: Index
     }
   ]
 })
