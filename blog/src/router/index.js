@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import 'babel-polyfill' // es6 shim
 import Hello from '@/components/Hello'
 import Register from '@/components/Register'
 import Blog from '@/components/Blog'
 import VueResource from 'vue-resource'
 import Index from '@/components/Index'
+import Info from '@/components/Info'
+import Info2 from '@/components/info2'
 
 Vue.use(VueResource)
 Vue.use(Router)
@@ -29,8 +32,18 @@ const router = new Router({
     },
     {
       path: '/index',
-      name: '/Index',
+      name: 'Index',
       component: Index
+    },
+    {
+      path: '/info',
+      name: 'Info',
+      component: Info
+    },
+    {
+      path: '/info2',
+      name: 'Info2',
+      component: Info2
     }
   ]
 })

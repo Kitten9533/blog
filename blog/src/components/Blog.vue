@@ -1,6 +1,9 @@
 <template>
 <div class="bg-gray">
-	<div class="wrapper wrapper-content animated fadeInRight blog">
+  <div class="div-left">
+    <left></left>
+  </div>
+	<div class="div-right wrapper wrapper-content animated fadeInRight blog">
        <!--  <div> -->
             <div class="row" v-for="(list,index) in objlist">
                 <div class="col-lg-4"  v-for="item in objlist[index]">
@@ -36,11 +39,29 @@
 
 <style>
     .bg-gray{
+      width:100%;
       background-color: #f3f3f4;
+    }
+    .div-left{
+      width:180px;
+      height: 100%;
+      top:0;
+      left: 0;
+      float:left;
+      position:fixed;
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
+    .div-right{
+      z-index: 1;
+      position:absolute;
+      left:180px;
+      float:left;
     }
 </style>
 
 <script>
+    import left from './Left.vue'
     export default{
       data () {
         // var objlist = this.getBlogList()
@@ -48,6 +69,9 @@
         return {
           objlist: ''
         }
+      },
+      components: {
+        left
       },
       methods: {
         getBlogList () {

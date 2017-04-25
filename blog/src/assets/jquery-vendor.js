@@ -1,5 +1,5 @@
-import $ from 'jQuery'
-console.log($)
-window.$ = $
-window.jQuery = $
-export default $
+// import $ from 'jQuery'
+// console.log($)
+// window.$ = $
+// window.jQuery = $
+// export default $
