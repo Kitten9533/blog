@@ -4,6 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import jquery from 'jquery'
+window.jQuery = jquery
+window.$ = jquery
+export default jquery
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -13,4 +18,3 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
-
