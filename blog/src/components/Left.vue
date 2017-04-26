@@ -3,9 +3,7 @@
 		<div class="left-menu">
 			<div class="photo" @click="toInfo()" title="更改用户信息">
 				<img src="../assets/img/signature.png"/>
-				<p class="left-menu-info">用户名 
-<!-- 					<span class="left-menu-option"></span> -->
-				</p>
+				<p class="left-menu-info">Kitten </p>
 			</div>
 			<ul class="left-menu-ul">
 				<li><p>1号坑</p></li>
@@ -29,7 +27,8 @@
 	}
 	.photo{
 		cursor:pointer;
-		padding:20px 80px 0 40px;
+		height: 140px;
+		padding:30px 80px 0 40px;
 		border-bottom: 1px solid rgba(255,255,255,0.1);
 	}
 	.photo img{
@@ -69,7 +68,7 @@
 	.left-menu{
 		width: 180px;
 		height: 1000px;
-		background: #2F4F4F;
+		background: #2F4050;
 		color:#fff;
 	}
 	.left-menu-ul li{
