@@ -3,7 +3,17 @@
 const models = require('./db');
 const express = require('express');
 const router = express.Router();
+const upload = require('./fileupload');
 
+// 文件上传
+router.post('/api/upload', upload.single('avatar'), function (req, res, next) {
+    console.log('upload')
+    if (req.file) {
+        res.send('文件上传成功')
+        console.log(req.file);
+        console.log(req.body);
+    }
+});
 /************** 创建(create) 读取(get) 更新(update) 删除(delete) **************/
 
 // 创建账号接口

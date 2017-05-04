@@ -8,6 +8,7 @@ import VueResource from 'vue-resource'
 import Index from '@/components/Index'
 import Info from '@/components/Info'
 import Info2 from '@/components/info2'
+import Upload from '@/components/Upload'
 
 Vue.use(VueResource)
 Vue.use(Router)
@@ -44,6 +45,11 @@ const router = new Router({
       path: '/info2',
       name: 'Info2',
       component: Info2
+    },
+    {
+      path: '/upload',
+      name: 'Upload',
+      component: Upload
     }
   ]
 })

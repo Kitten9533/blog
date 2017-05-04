@@ -86,7 +86,7 @@
 	  },
 	  methods: {
 	    toInfo () {
-	      this.$router.push({'name': 'Info'})
+	      this.$router.push({'name': 'Upload'})
 	    }
 	  }
 	}
