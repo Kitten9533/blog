@@ -13,7 +13,7 @@
         props: ['time'],
         watch: {
             time: function(curV, oldV){
-                localStorage.setItem('time', curV)
+                localStorage.setItem('time', parseFloat(curV))
             }
         }
     }

@@ -6,7 +6,7 @@
                 <input type="date" class="form-control" v-model="timeEntry.date" placeholder="Date" /> </div>
             <div class="col-sm-6">
                 <label>时间</label>
-                <input type="number" class="form-control" v-model="timeEntry.totalTime" placeholder="Hours" /> </div>
+                <input type="number" class="form-control" v-model="timeEntry.totalTime" placeholder="Hours"/> </div>
         </div>
         <div class="form-group">
             <div class="col-sm-12">
@@ -46,7 +46,10 @@ export default {
                     name: 'Kitten',
                     email: 'kodo@forchange.cn',
                     image: 'https://sfault-avatar.b0.upaiyun.com/888/223/888223038-5646dbc28d530_huge256'
-                }
+                },
+                comment: '',
+                totalTime: 0,
+                date: ''
             };
 
         }
