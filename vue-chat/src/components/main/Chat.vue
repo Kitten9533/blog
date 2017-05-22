@@ -1,59 +1,103 @@
 <template>
-	<div>
-		<div id="convo" data-from="Sonu Joshi">  
+	<div class="chat-box" ref="chatBox">
+		<div class="chat-content" data-from="Sonu Joshi" ref="chatContent">
 			<ul class="chat-thread">
-				<li>Are we meeting today?</li>
-				<li>yes, what time suits you?</li>
-				<li>I was thinking after lunch, I have a meeting in the morning</li>
-			  	<li>Are we meeting today?</li>
-				<li>yes, what time suits you?</li>
-				<li>I was thinking after lunch, I have a meeting in the morning</li>
-			  	<li>Are we meeting today?</li>
-				<li>yes, what time suits you?</li>
-				<li>I was thinking after lunch, I have a meeting in the morning</li>
-			  	<li>Are we meeting today?</li>
-				<li>yes, what time suits you?</li>
-				<li>I was thinking after lunch, I have a meeting in the morning</li>
-				<li>Are we meeting today?</li>
-				<li>yes, what time suits you?</li>
-				<li>I was thinking after lunch, I have a meeting in the morning</li>
-				<li>Are we meeting today?</li>
-				<li>yes, what time suits you?</li>
-				<li>I was thinking after lunch, I have a meeting in the morning</li>
-				<li>Are we meeting today?</li>
-				<li>yes, what time suits you?</li>
-				<li>I was thinking after lunch, I have a meeting in the morning</li>
-				<li>Are we meeting today?</li>
-				<li>yes, what time suits you?</li>
-				<li>I was thinking after lunch, I have a meeting in the morning</li>
+				<li v-for="(msg, index) in msgList" v-text="msg.content">{{index}}</li>
 			</ul>
 		</div>
 		<div class="chat-footer">
-			<input class="chat-content" type="text" name="content"/>
+			<table>
+				<tbody>
+					<tr>
+						<td>
+							<input class="send-content" type="text" name="content"/>
+						</td>
+						<td width="100" class="send-btn-td">
+							<a class="send-btn" style="color:#fff">Send</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </template>
 
 <style scoped>
 	@import '/static/css/style.css';
+	.chat-box{
+		height: 100%;
+	}
+	.chat-content{
+		height: 80%;
+	}
 	.chat-thread{
 		width: 80%;
-		height: 450px;
-		padding: 10px;
+		height: 100%;
+		margin-top: 0;
+	}
+	.chat-thread li{
+		margin-top: 10px;
+		margin-bottom: 10px;
 	}
 	.chat-footer{
 		width: 80%;
-		height: 30px;
-	  	margin: 24px auto 0 auto;
+		height: 50px;
+		margin: 20px auto 0 auto;
 	  	padding: 0;
 	  	list-style: none;
-	  	background: #fff;
-	  	border-radius: 10px;
+	  	position: absolute;
+	  	left: 10%;
+	  	bottom: 20px;
 	}
-	.chat-content{
+	.chat-footer table, .chat-footer tbody, .chat-footer tr{
 		width: 100%;
 		height: 100%;
-	  	border: none;
-	  	text-indent: 20px;
+		margin: 0;
+		padding: 0;
+	}
+	.chat-footer table{
+		padding: -20px;
+	}
+	.send-content{
+		width: 100%;
+		height: 44px;
+		line-height: 30px;
+		border-radius: 3px;
+		border: none;
+	}
+	.send-btn-td{
+		background: rgb(24, 56, 80);
+		border-radius: 3px;
+		border: none;
+	}
+	.send-btn{
+		width: 100%;
+		height: 40px;
+		line-height: 1.4;
 	}
 </style>
+
+<script>
+	export default {
+	  name: 'chat',
+	  data () {
+	    var arr = []
+	    for (let i = 0; i < 5; i++) {
+	      arr.push({content: 'Are we meeting today?'})
+	      arr.push({content: 'yes, what time suits you?'})
+	      arr.push({content: 'I was thinking after lunch, I have a meeting in the morning'})
+	    }
+	    return {
+	      msgList: arr
+	    }
+	  },
+	  methods: {},
+	  mounted () {
+	    this.$refs.chatContent.style.height = window.innerHeight - 100 + 'px'
+	    const that = this
+	    window.onresize = () => {
+	      that.$refs.chatContent.style.height = window.innerHeight - 100 + 'px'
+	    }
+	  }
+	}
+</script>
