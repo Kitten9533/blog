@@ -5,7 +5,7 @@ var io = require('socket.io')(server);
 var onlineUserList = [];// 当前在线用户列表
 // [{userId, userName, userImg},{...}]
 
-io.on('connection', function(obj){
+io.on('connection', function(socket){
 	console.log(' 创建连接成功');
 	// 登录
 	socket.on('login', (obj) => {
@@ -20,7 +20,10 @@ io.on('connection', function(obj){
 		if(!flag) {// 在线新用户添加
 			onlineUserList.push(obj);
 		}
-		this.broadcast.emit('login', {loginUser: obj, onlineUserList: onlineUserList});
+		console.log(obj)
+		console.log(onlineUserList)
+		socket.broadcast.emit('login', {loginUser: obj, onlineUserList: onlineUserList});
+		console.log('broadcast end');
 	});
 
 	// 退出
@@ -36,13 +39,13 @@ io.on('connection', function(obj){
 			}
 		}
 		if(flag) {
-			this.broadcast.emit('logout', {msg: user.userName + '退出了...'});
+			socket.broadcast.emit('logout', {msg: user.userName + '退出了...'});
 		}
 	});
 
 	// 发送消息
 	socket.on('message', (obj) => {
-		this.broadcast.emit('message', {msg: obj});
+		socket.broadcast.emit('message', {msg: obj});
 	})
 
 });
