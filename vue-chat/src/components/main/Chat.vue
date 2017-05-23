@@ -1,7 +1,7 @@
 <template>
 	<div class="chat-box" ref="chatBox">
 		<div class="chat-content" data-from="Sonu Joshi" ref="chatContent">
-			<ul class="chat-thread">
+			<ul class="chat-thread" ref="chatThread">
 				<li v-for="(msg, index) in msgList" v-text="msg.content">{{index}}</li>
 			</ul>
 		</div>
@@ -10,7 +10,7 @@
 				<tbody>
 					<tr>
 						<td>
-							<input class="send-content" type="text" name="content"/>
+							<input class="send-content" type="text" ref="content" @keyup.13="sendMsg($event)"/>
 						</td>
 						<td width="100" class="send-btn-td">
 							<a class="send-btn" style="color:#fff">Send</a>
@@ -23,7 +23,6 @@
 </template>
 
 <style scoped>
-	@import '/static/css/style.css';
 	.chat-box{
 		height: 100%;
 	}
@@ -64,6 +63,8 @@
 		line-height: 30px;
 		border-radius: 3px;
 		border: none;
+		font-size: 20px;
+		text-indent: 20px;
 	}
 	.send-btn-td{
 		background: rgb(24, 56, 80);
@@ -91,7 +92,20 @@
 	      msgList: arr
 	    }
 	  },
-	  methods: {},
+	  watch: {
+	    msgList () {
+	      this.$nextTick(function () {
+	        var height = this.$refs.chatThread.scrollHeight
+	        this.$refs.chatThread.scrollTop = height
+	      })
+	    }
+	  },
+	  methods: {
+	    sendMsg: function ($event) {
+	      // TODO 发送消息
+	      this.msgList.push({content: this.$refs.content.value})
+	    }
+	  },
 	  mounted () {
 	    this.$refs.chatContent.style.height = window.innerHeight - 100 + 'px'
 	    const that = this
