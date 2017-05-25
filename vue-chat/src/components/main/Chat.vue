@@ -1,5 +1,11 @@
 <template>
 	<div class="chat-box" ref="chatBox">
+		<div class="setUserName-box" v-show="enterUserName">
+			<div class="setUserName">
+				<p>Enter your name:</p>
+				<input type="text" name="userName" ref="userName" @keyup.13="setUserName($event)"/>
+			</div>
+		</div>
 		<div class="chat-content" data-from="Sonu Joshi" ref="chatContent">
 			<ul class="chat-thread" ref="chatThread">
 				<li v-for="msg in msgList" :class="[{'other':msg.senderId!=userId && msg.senderId !=0,'me':msg.senderId==userId  && msg.senderId !=0, 'system':msg.senderId==0}]" v-html="msg.content"></li>
@@ -83,6 +89,38 @@
 		margin: 10px auto !important;
 		width: 60%;
 	}
+	.setUserName-box{
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		z-index: 3;
+		background: rgba(0, 0, 0, 0.5);
+	}
+	.setUserName{
+		width: 400px;
+		height: 140px;
+		position: absolute;
+		top:50%;
+		left: 50%;
+		margin-left: -200px;
+		margin-top: -70px;
+		border-radius: 10px;
+		background: rgb(24, 56, 80);
+        box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+	}
+	.setUserName p{
+		color: #fff;
+	}
+	.setUserName input{
+		width: 80%;
+		font-size:30px;
+		height: 40px;
+		line-height: 1.4;
+		margin:10px auto;
+		text-align: center;
+		border-radius: 5px;
+		border: none;
+	}
 </style>
 
 <script>
@@ -99,8 +137,10 @@
 	    return {
 	      msgList: arr,
 	      content: '',
-	      userNameList: ['奥特曼', '小怪兽', 'Kitten', 'John', 'JSON', 'JAVASCRIPT'],
-	      userId: ''// 当前用户的id
+	      // userNameList: ['奥特曼', '小怪兽', 'Kitten', 'John', 'JSON', 'JAVASCRIPT'],
+	      userNameList: ['奥特曼', '小怪兽'],
+	      userId: '', // 当前用户的id,
+	      enterUserName: true // 用户名输入框的显示 隐藏
 	    }
 	  },
 	  watch: {
@@ -113,21 +153,31 @@
 	    }
 	  },
 	  methods: {
-	    connect () {
+	    setUserName ($event) {
+	      if (this.$refs.userName.value) {
+	        this.enterUserName = false
+	        this.connect(this.$refs.userName.value)
+	      } else {
+	        alert('Please enter your name')
+	      }
+	    },
+	    connect (userName) {
 	      // 生成随机用户
-	      var num = Math.floor(Math.random() * 10) % 6
+	      // var num = Math.floor(Math.random() * 10) % 2
 	      var userInfo = {
 	        userId: this.getUserId(),
-	        userName: this.userNameList[num]
+	        // userName: this.userNameList[num]
+	        userName: userName
 	      }
-	      this.httpServer = io.connect('http://123.206.111.248:8010')
-	      // console.log(userInfo)
+	      // this.httpServer = io.connect('http://123.206.111.248:8010')
+	      this.httpServer = io.connect('http://127.0.0.1:8010')
+	      console.log(userInfo)
 	      this.httpServer.emit('login', userInfo)
 	      this.httpServer.on('login', (obj) => {
 	        // 有人登陆，可以显示 *** 加入了房间
 	        console.log(obj)
 	        console.log(obj.loginUser.userName + ' join')
-	        this.msgList.push({content: obj.loginUser.userName + ' join the chatroom', senderId: 0})
+	        this.msgList.push({content: obj.loginUser.userName + ' 加入了', senderId: 0})
 	        this.toBottom()
 	      })
 	      this.httpServer.on('message', (obj) => {
@@ -135,8 +185,9 @@
 	        this.msgList.push({content: obj.msg.msg})
 	        this.toBottom()
 	      })
-	      this.httpServer.on('disconnect', (data) => {
-	        console.log(data)
+	      this.httpServer.on('logout', (obj) => {
+	        this.msgList.push({content: obj.msg, senderId: 0})
+	        this.toBottom()
 	      })
 	    },
 	    getUserId () {
@@ -155,7 +206,7 @@
 	  },
 	  mounted () {
 	    // 连接
-	    this.connect()
+	    // this.setUserName()
 	    this.toBottom()
 	    const that = this
 	    window.onresize = () => {

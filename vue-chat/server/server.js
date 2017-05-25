@@ -1,4 +1,4 @@
-var app = require('express')();
+﻿var app = require('express')();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
@@ -6,9 +6,9 @@ var onlineUserList = [];// 当前在线用户列表
 // [{userId, userName, userImg},{...}]
 
 io.on('connection', function(socket){
-	console.log(' 创建连接成功');
 	// 登录
 	socket.on('login', (obj) => {
+		console.log(obj)
 		socket.socketId = obj.userId;
 		let flag = false;
 		for(let i = 0; i < onlineUserList.length; i++) {
@@ -20,14 +20,15 @@ io.on('connection', function(socket){
 		if(!flag) {// 在线新用户添加
 			onlineUserList.push(obj);
 		}
-		console.log(obj)
-		console.log(onlineUserList)
 		socket.broadcast.emit('login', {loginUser: obj, onlineUserList: onlineUserList});
-		console.log('broadcast end');
 	});
 
-	// 退出
-	socket.on('logout', (obj) => {
+	// 发送消息
+	socket.on('message', (obj) => {
+		socket.broadcast.emit('message', {msg: obj});
+	})
+
+	socket.on('disconnect', () => {
 		let user = {};
 		let flag = false;
 		for(let i = 0; i < onlineUserList.length; i++) {
@@ -39,18 +40,8 @@ io.on('connection', function(socket){
 			}
 		}
 		if(flag) {
-			socket.broadcast.emit('logout', {msg: user.userName + '退出了...'});
+			socket.broadcast.emit('logout', {msg: user.userName + ' 退出了...'});
 		}
-	});
-
-	// 发送消息
-	socket.on('message', (obj) => {
-		socket.broadcast.emit('message', {msg: obj});
-	})
-
-	socket.on('disconnect', (data) => {
-		socket.broadcast.emit('disconnect', data);
-		console.log('用户退出')
 	})
 
 });
