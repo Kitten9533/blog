@@ -22,7 +22,7 @@ npm run build --report
 私聊相当于room中只有2个人，群聊有多个,
 暂时完成聊天室的
 消息 msg [{
-	senderId:'',// 发送人
+	senderId:'',// 发送人  ,暂设  系统的sender = 0
 	roomId:'',// 聊天室
 	time:'',// 发送时间
 	type:'',// 消息类型   1 系统消息，2.聊天信息

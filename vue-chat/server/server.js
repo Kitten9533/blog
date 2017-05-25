@@ -48,6 +48,11 @@ io.on('connection', function(socket){
 		socket.broadcast.emit('message', {msg: obj});
 	})
 
+	socket.on('disconnect', (data) => {
+		socket.broadcast.emit('disconnect', data);
+		console.log('用户退出')
+	})
+
 });
 server.listen(8010);
 console.log('success  ----->  running on 8010');

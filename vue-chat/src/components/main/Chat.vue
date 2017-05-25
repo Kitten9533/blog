@@ -2,7 +2,7 @@
 	<div class="chat-box" ref="chatBox">
 		<div class="chat-content" data-from="Sonu Joshi" ref="chatContent">
 			<ul class="chat-thread" ref="chatThread">
-				<li v-for="(msg, index) in msgList" :class="{'other':msg.senderId!=userId,'me':msg.senderId==userId}" v-html="msg.content">{{index}}</li>
+				<li v-for="msg in msgList" :class="[{'other':msg.senderId!=userId && msg.senderId !=0,'me':msg.senderId==userId  && msg.senderId !=0, 'system':msg.senderId==0}]" v-html="msg.content"></li>
 			</ul>
 		</div>
 		<div class="chat-footer">
@@ -76,6 +76,13 @@
 		height: 40px;
 		line-height: 1.4;
 	}
+	/*系统消息样式*/
+	.system{
+		display: block;
+		color: #fff;
+		margin: 10px auto !important;
+		width: 60%;
+	}
 </style>
 
 <script>
@@ -85,7 +92,7 @@
 	  data () {
 	    var arr = []
 	    for (let i = 0; i < 5; i++) {
-	      arr.push({content: 'Are we meeting today?', senderId: '1'})
+	      arr.push({content: 'Are we meeting today?', senderId: '0'})
 	      arr.push({content: 'yes, what time suits you?', senderId: '1'})
 	      arr.push({content: 'I was thinking after lunch, I have a meeting in the morning', senderId: '2'})
 	    }
@@ -114,15 +121,22 @@
 	        userName: this.userNameList[num]
 	      }
 	      this.httpServer = io.connect('http://123.206.111.248:8010')
-	      console.log(userInfo)
+	      // console.log(userInfo)
 	      this.httpServer.emit('login', userInfo)
 	      this.httpServer.on('login', (obj) => {
 	        // 有人登陆，可以显示 *** 加入了房间
+	        console.log(obj)
+	        console.log(obj.loginUser.userName + ' join')
+	        this.msgList.push({content: obj.loginUser.userName + ' join the chatroom', senderId: 0})
+	        this.toBottom()
 	      })
 	      this.httpServer.on('message', (obj) => {
 	        console.log(obj)
 	        this.msgList.push({content: obj.msg.msg})
 	        this.toBottom()
+	      })
+	      this.httpServer.on('disconnect', (data) => {
+	        console.log(data)
 	      })
 	    },
 	    getUserId () {
