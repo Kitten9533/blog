@@ -97,6 +97,10 @@
 		background: rgba(0, 0, 0, 0.5);
 	}
 	.setUserName{
+		padding-top: 40px;
+		padding-bottom: 0px;
+		padding-left: 30px;
+		padding-right: 30px;
 		width: 400px;
 		height: 140px;
 		position: absolute;
@@ -120,6 +124,7 @@
 		text-align: center;
 		border-radius: 5px;
 		border: none;
+		background: #ececec;
 	}
 </style>
 
@@ -177,7 +182,7 @@
 	        // 有人登陆，可以显示 *** 加入了房间
 	        console.log(obj)
 	        console.log(obj.loginUser.userName + ' join')
-	        this.msgList.push({content: obj.loginUser.userName + ' 加入了', senderId: 0})
+	        this.msgList.push({content: obj.loginUser.userName + ' 加入了...', senderId: 0})
 	        this.toBottom()
 	      })
 	      this.httpServer.on('message', (obj) => {

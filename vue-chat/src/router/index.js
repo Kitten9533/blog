@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // import Hello from '@/components/Hello'
-// import Cover from '@/components/Cover'
+import Cover from '@/components/Cover'
 import Chat from '@/components/main/Chat'
 
 Vue.use(Router)
@@ -17,6 +17,11 @@ export default new Router({
       path: '/',
       name: 'Chat',
       component: Chat
+    },
+    {
+      path: '/cover',
+      name: 'Cover',
+      component: Cover
     }
   ]
 })
