@@ -23,7 +23,7 @@
 		height: 80px;
 		line-height: 80px;
 		cursor: pointer;
-		border-bottom: 1px outset #fff;
+		border-bottom: 1px outset #d8d8d8;
 	}
 	.menu li.userinfo{
 		height: 100px;

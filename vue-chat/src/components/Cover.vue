@@ -1,6 +1,6 @@
 <template>
 	<div class="container" style="color:#fff;">
-		<table class="box">
+		<table class="box" cellspacing="1" cellpadding="0">
 			<tr>
 				<td width="150">
 					<left></left>
@@ -33,7 +33,7 @@
 		height: 100%;
 	}
 	.center{
-		border-left: 1px outset #b5b5b5;
+		border-left: 1px outset #777777;
 	}
 </style>
 
