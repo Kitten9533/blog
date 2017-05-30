@@ -2,14 +2,14 @@
 	<div class="container" style="color:#fff;">
 		<table class="box" cellspacing="1" cellpadding="0">
 			<tr>
-				<td width="150">
-					<left></left>
+				<td width="180">
+					<left v-on:setName="setName"></left>
 				</td>
 				<td class="center">
-					<center></center>
+					<center :centerName="centerName" :userInfo="userInfo"></center>
 				</td>
-				<td width="240">
-					<right></right>
+				<td width="290">
+					<right v-on:getUser="setUser"></right>
 				</td>
 			</tr>
 		</table>
@@ -24,6 +24,7 @@
 	body, .container{
 		width: 100%;
 		height: 100%;
+		overflow:hidden;
 	}
 	.box{
 		width: 100%;
@@ -43,12 +44,23 @@
 	import right from './Right.vue'
 	export default{
 	  data () {
-	    return {}
+	    return {
+	      centerName: 'Overview',
+	      userInfo: {}
+	    }
 	  },
 	  components: {
 	    left: left,
 	    center: center,
 	    right: right
+	  },
+	  methods: {
+	    setName (name) {
+	      this.centerName = name
+	    },
+	    setUser (user) {
+	      this.userInfo = user
+	    }
 	  }
 	}
 </script>

@@ -1,5 +1,13 @@
 <template>
-	<div class="box">Center</div>
+	<div class="box">
+		<div class="center-top">
+			<h4 v-text="centerName"></h4>
+		</div>
+		<div class="center-main" ref="main">
+			<router-view :userInfo="userInfo"></router-view>
+		</div>
+		
+	</div>
 </template>
 
 <style scoped>
@@ -14,12 +22,38 @@
 	    background-repeat: no-repeat;
 	    background-attachment: fixed;
 	}
+	h4{
+		text-align: left;
+	    padding: 20px 40px;
+	    font-size: 20px;
+	    font-weight: 400;
+	    height: 20px;
+	}
+	.center-top{
+		height: 60px;
+	}
+	.center-main{
+		height: 90%;
+	}
 </style>
 
 <script>
 	export default{
 	  data () {
 	    return {}
+	  },
+	  props: ['centerName', 'userInfo'],
+	  methods: {
+	    changeMain () {
+	      this.$refs.main.style.height = window.innerHeight - 60 + 'px'
+	    }
+	  },
+	  mounted () {
+	    const that = this
+	    this.changeMain()
+	    window.onresize = () => {
+	      that.$refs.main.style.height = window.innerHeight - 60 + 'px'
+	    }
 	  }
 	}
 </script>

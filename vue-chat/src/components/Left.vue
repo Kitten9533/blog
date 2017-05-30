@@ -1,7 +1,7 @@
 <template>
 	<div class="box">
 		<ul class="menu">
-			<li class="userinfo">Name</li>
+			<li @click="toCover" class="userinfo">Name</li>
 			<li v-for="(item, index) in menuList" v-bind:class="{'active': item.active}" v-text="item.name" @click="changeActive(index)"></li>
 		</ul>
 	</div>
@@ -22,7 +22,8 @@
 	.menu li{
 		height: 80px;
 		line-height: 80px;
-		cursor: pointer;
+		/*cursor: pointer;*/
+		cursor: default;
 		border-bottom: 1px outset #d8d8d8;
 	}
 	.menu li.userinfo{
@@ -32,6 +33,17 @@
 	.active{
 		border-left: 3px solid rgb(53,166,242);
 		background: rgb(47,54,64);
+	}
+	::selection{
+		color:#fff;
+	}
+	::-moz-selection{
+		color:#fff;
+	}
+	a{
+		cursor: default;
+    	color: #fff;
+    	text-decoration: none;
 	}
 </style>
 
@@ -54,6 +66,11 @@
 	        this.menuList[i].active = false
 	      }
 	      this.menuList[index].active = true
+	      // 将选中的菜单名传给Cover
+	      this.$emit('setName', this.menuList[index].name)
+	    },
+	    toCover () {
+	      this.$router.push({'path': '/cover'})
 	    }
 	  }
 	}
