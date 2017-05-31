@@ -1,7 +1,7 @@
 <template>
 	<div class="box" ref="box">
 		<div class="top">
-			<p v-text="toUser.userName"></p>
+			<p v-text="this.toUser.userId ? toUser.userName : '请先选择联系人'"></p>
 			<i :class="['iconfont icon-yuanhuan', {'green': toUser.online}, {'white': !toUser.online}]"></i>
 		</div>
 		<div class="hr-box"><div class="hr"></div></div>
@@ -12,7 +12,7 @@
 				v-if="item.group == toUser.userId + frUser.userId || item.group == frUser.userId + toUser.userId">
 <!-- 					<p>{{item.toUser.userId}}  {{toUser.userId}}  {{frUser.userId}}</p> -->
 					<img v-bind:src="!!item.toUser.userImg ? item.toUser.userImg : '/static/imgs/default.png'"/>
-					<span v-html="!!item.content ? item.content : '&nbsp;'"></span>
+					<p v-html="!!item.content ? item.content : '&nbsp;'"></p>
 				</li>
 			</ul>
 		</div>
@@ -21,7 +21,7 @@
 			<table>
 				<tr>
 					<td>
-						<input class="send-content" type="text" @keyup.13="sendMsg" v-model="content"/>
+						<input class="send-content" :disabled="!this.toUser.userId" :class="{'disabled': !this.toUser.userId}" type="text" @keyup.13="sendMsg" v-model="content"/>
 					</td>
 					<td width="80" class="send-btn-td">
 						<a class="send-btn" style="color:#fff" @click="sendMsg">Send</a>
@@ -34,14 +34,15 @@
 </template>
 
 <style scoped>
-	span{
-		word-wrap:break-word;white-space:normal;
+	li p{
+		word-wrap:break-word;white-space:normal;max-width: 500px;
 	}
 	a::selection{
 		color: #fff;
 	}
 	.box{
 		width: 100%;
+		min-width: 700px;
 		height: 100%; 
 		position: relative;	
 	}
@@ -121,7 +122,7 @@
 		display: inline-block;
 		position: absolute;
 	}
-	.other span{
+	.other p{
 	    display: inline-block;
 	    margin-left: 50px;
 	    padding: 8px 10px;
@@ -133,7 +134,7 @@
 	    position: relative;
 	    font-size: 14px;
 	}
-	.other span:before{
+	.other p:before{
 		content: '';
 		display: block;
 		position: absolute;
@@ -158,7 +159,7 @@
 		right: 40px;
 		font-size: 14px;
 	}
-	.me span{
+	.me p{
 	    display: inline-block;
 	    margin-right: 50px;
 	    padding: 8px 10px;
@@ -169,7 +170,7 @@
 	    text-align: left;
 	    position: relative;
 	}
-	.me span:after{
+	.me p:after{
 		content: '';
 		display: block;
 		position: absolute;
@@ -185,6 +186,9 @@
 	}
 	.white{
 		color: #ccc;
+	}
+	.disabled{
+    	cursor: not-allowed;
 	}
 </style>
 

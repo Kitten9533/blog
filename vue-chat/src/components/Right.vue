@@ -21,7 +21,7 @@
 					<div class="userimg-box">
 						<img class="userimg" v-bind:src="!!item.userImg ? item.userImg : '/static/imgs/default.png'"/>
 					</div>
-					<p class="username">{{item.userName}}<span class="status iconfont icon-yuanhuan white"></span></p>
+					<p class="username" v-text="item.userName"><span class="status iconfont icon-yuanhuan white"></span></p>
 					<p class="content" v-text="item.content"></p>
 				</li>
 			</ul>
@@ -224,6 +224,25 @@
 	        }
 	        self.onlineList = online
 	        self.offlineList = offline
+	      })
+	      this.httpServer.on('getMsg', (msg) => {
+	        console.log(msg)
+	        for (let i = 0; i < this.onlineList.length; i++) {
+	          if (this.onlineList[i].userId === msg.frUser.userId && this.currentUser.userId !== msg.frUser.userId) {
+	            // this.onlineList[i].content = msg.content
+	            // this.$set(this.onlineList, i, {
+	            //   content: msg.content
+	            // })
+	            // this.onlineList[i] = Object.assign({}, this.onlineList[i], {content: msg.content})
+	            // 由于javascript的限制，vue不能检测以下变动的数组
+	            // 1.当你利用索引直接设置一个项时， vm.items[index] = newValue
+	            // 2.当你修改数组的长度时，vm.items.length = newLength
+	            this.onlineList.splice(i, 1)
+	            let obj = msg.frUser
+	            obj.content = msg.content
+	            this.onlineList.splice(0, 0, obj)
+	          }
+	        }
 	      })
 	    },
 	    getUser () {
