@@ -4,9 +4,10 @@
 			<input class="search-btn" type="text" name="search" placeholder="Search..."/>
 		</div>
 		<div class="userlist" ref="userlist">
+			<!-- <p v-text="currentUser"></p> -->
 			<ul class="online">
 				<li class="tag" @click="showOnline = !showOnline">online<i :class="['iconfont icon-caret tag-text',{'tag-text-hover': showOnline}]"></i></li>
-				<li v-for="item in onlineList" v-if="showOnline" :userId="item.userId" @click="openPm(item)">
+				<li v-for="item in onlineList" v-if="showOnline && currentUser.userId!=item.userId" :userId="item.userId" @click="openPm(item)">
 					<div class="userimg-box">
 						<img class="userimg" v-bind:src="!!item.userImg ? item.userImg : '/static/imgs/default.png'"/>
 					</div>
@@ -14,7 +15,7 @@
 					<p class="content" v-text="item.content"></p>
 				</li>
 			</ul>
-			<ul>
+			<ul class="offline">
 				<li class="tag" @click="showOffline = !showOffline">offline<i :class="['iconfont icon-caret tag-text',{'tag-text-hover': showOffline}]"></i></li>
 				<li v-for="item in offlineList" v-if="showOffline" :userId="item.userId" @click="openPm(item)">
 					<div class="userimg-box">
@@ -168,17 +169,17 @@
 </style>
 
 <script>
-	import io from '../../static/js/socket.io'
+	// import io from '../../static/js/socket.io'
 	export default{
 	  data () {
 	    // this.connect()
 	    // this.getList()
-	    console.log('data')
 	    return {
 	      onlineList: ['11'],
 	      offlineList: ['22'],
 	      showOnline: true,
-	      showOffline: true
+	      showOffline: true,
+	      currentUser: {userId: '', userName: ''}
 	    }
 	  },
 	  methods: {
@@ -188,7 +189,7 @@
 	    getList () {
 	      this.$http.get('/api/getOnline')
 	        .then((response) => {
-	          console.log(response)
+	          // console.log(response)
 	          this.onlineList = response.data.data
 	        })
 	        .catch((reject) => {
@@ -196,7 +197,7 @@
 	        })
 	      this.$http.get('/api/getOffline')
 	        .then((response) => {
-	          console.log(response)
+	          // console.log(response)
 	          this.offlineList = response.data.data
 	        })
 	        .catch((reject) => {
@@ -205,12 +206,11 @@
 	    },
 	    connect () {
 	      // this.getList()
-	      this.httpServer = io.connect('http://127.0.0.1:8010')
 	      var user = this.getUser()
 	      var self = this
 	      this.httpServer.emit('login', user)
+	      this.$emit('getFrUser', user)
 	      this.httpServer.on('refreshList', (data) => {
-	        console.log(data)
 	        var online = []
 	        var offline = []
 	        var userList = data.userList
@@ -233,15 +233,15 @@
 	      var firstName = ['White', 'Harris', 'Martin', 'Thompson', 'Garcia', 'Martinez', 'Robinson', 'Clark', 'Rodriguez', 'Rodriguez']
 	      obj.userName = lastName[Math.floor(Math.random() * 10)] + ' ' + firstName[Math.floor(Math.random() * 10)]
 	      obj.userImg = ''
+	      this.currentUser = obj
 	      return obj
 	    },
 	    openPm (user) {
 	      this.$router.push({path: '/cover/pm'})
-	      this.$emit('getUser', user)
+	      this.$emit('getToUser', user)
 	    }
 	  },
 	  mounted () {
-	    console.log('mounted')
 	    this.connect()
 	    this.initStyle()
 	    window.onresize = () => {

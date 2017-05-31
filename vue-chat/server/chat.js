@@ -1,6 +1,7 @@
 var app = require('express')();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
+var _ = require('underscore');
 
 var userList = [];
 var onlineList = [];
@@ -26,6 +27,8 @@ io.on('connection', function (socket) {
 		console.log(userList.length);
 		// 在线用户传给前台页面，更新在线用户列表
 		io.sockets.emit('refreshList', {loginUser: user, userList: userList});
+		console.log(userList.length);
+		console.log(userList);
 	})
 	socket.on('disconnect', () => {
 		let user = {};
@@ -40,8 +43,22 @@ io.on('connection', function (socket) {
 		}
 		if (flag) {
 			io.sockets.emit('refreshList', {loginUser: {}, userList: userList});
-			socket.broadcast.emit('logout', {logoutuser: user, userList: userList});
+			// socket.broadcast.emit('logout', {logoutuser: user, userList: userList});
 		}
+	})
+	socket.on('sendMsg', (msg) => {
+		console.log('有人发送消息');
+		// socket.broadcast.emit('getMsg', {});
+	})
+	socket.on('sendTo', (msg) => {// msg: {toUser, content, type}
+		toUser = msg.toUser.userId;
+		// console.log(msg);
+		var toSocket;
+		if(toSocket = _.findWhere(io.sockets.sockets,{socketId: toUser})){
+			// 发给别人   group相当于群组   私聊时为接收人的id， 群聊时为群组id
+            toSocket.emit('getMsg', {toUser: msg.toUser,frUser: msg.frUser, group: msg.group, content: msg.content, type: msg.type});
+            // socket.emit('getMsg', {toUser: msg.frUser,frUser: msg.toUser, group: msg.group, content: msg.content, type: msg.type});
+        }
 	})
 });
 

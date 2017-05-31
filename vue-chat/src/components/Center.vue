@@ -4,7 +4,7 @@
 			<h4 v-text="centerName"></h4>
 		</div>
 		<div class="center-main" ref="main">
-			<router-view :userInfo="userInfo"></router-view>
+			<router-view :toUser="toUser" :frUser="frUser"></router-view>
 		</div>
 		
 	</div>
@@ -42,7 +42,7 @@
 	  data () {
 	    return {}
 	  },
-	  props: ['centerName', 'userInfo'],
+	  props: ['centerName', 'toUser', 'frUser'],
 	  methods: {
 	    changeMain () {
 	      this.$refs.main.style.height = window.innerHeight - 60 + 'px'

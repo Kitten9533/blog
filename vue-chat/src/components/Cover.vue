@@ -6,10 +6,10 @@
 					<left v-on:setName="setName"></left>
 				</td>
 				<td class="center">
-					<center :centerName="centerName" :userInfo="userInfo"></center>
+					<center :centerName="centerName" :toUser="toUser" :frUser="frUser"></center>
 				</td>
 				<td width="290">
-					<right v-on:getUser="setUser"></right>
+					<right v-on:getToUser="setToUser" v-on:getFrUser="setFrUser"></right>
 				</td>
 			</tr>
 		</table>
@@ -46,7 +46,8 @@
 	  data () {
 	    return {
 	      centerName: 'Overview',
-	      userInfo: {}
+	      toUser: {},
+	      frUser: {}
 	    }
 	  },
 	  components: {
@@ -58,8 +59,11 @@
 	    setName (name) {
 	      this.centerName = name
 	    },
-	    setUser (user) {
-	      this.userInfo = user
+	    setToUser (toUser) {
+	      this.toUser = toUser
+	    },
+	    setFrUser (frUser) {
+	      this.frUser = frUser
 	    }
 	  }
 	}
