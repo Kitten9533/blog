@@ -4,9 +4,11 @@
 			<h4 v-text="centerName"></h4>
 		</div>
 		<div class="center-main" ref="main">
-			<router-view :toUser="toUser" :frUser="frUser"></router-view>
-		</div>
-		
+			<keep-alive>
+				<router-view v-if="!$route.meta.notKeepAlive" :toUser="toUser" :frUser="frUser"></router-view>
+			</keep-alive>
+			<router-view v-if="$route.meta.notKeepAlive" :toUser="toUser" :frUser="frUser"></router-view>
+		</div>		
 	</div>
 </template>
 

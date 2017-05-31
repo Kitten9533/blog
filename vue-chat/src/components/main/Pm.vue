@@ -4,10 +4,12 @@
 			<p v-text="toUser.userName"></p>
 			<i :class="['iconfont icon-yuanhuan', {'green': toUser.online}, {'white': !toUser.online}]"></i>
 		</div>
+		<div class="hr-box"><div class="hr"></div></div>
 		<div class="content" ref="content">
 			<ul class="chat-box" ref="contentUl">
-				<li :class="{'other': frUser.userId == item.group && frUser.userId == item.toUser.userId, 'me': item.self}" 
-				v-for="item in msgList">
+				<li :class="{'other': frUser.userId == item.toUser.userId, 'me': frUser.userId == item.frUser.userId}" 
+				v-for="item in msgList" 
+				v-if="item.group == toUser.userId + frUser.userId || item.group == frUser.userId + toUser.userId">
 <!-- 					<p>{{item.toUser.userId}}  {{toUser.userId}}  {{frUser.userId}}</p> -->
 					<img v-bind:src="!!item.toUser.userImg ? item.toUser.userImg : '/static/imgs/default.png'"/>
 					<span v-html="!!item.content ? item.content : '&nbsp;'"></span>
@@ -32,7 +34,10 @@
 </template>
 
 <style scoped>
-	::selection{
+	span{
+		word-wrap:break-word;white-space:normal;
+	}
+	a::selection{
 		color: #fff;
 	}
 	.box{
@@ -45,11 +50,21 @@
 		text-align: left;
 		height: 20px;
 	}
+	.top p{
+		/*text-indent: 20px;*/
+	}
+	.hr-box{
+		padding: 0 40px;
+	}
+	.hr{
+		border-bottom: 1px outset #fff;
+	}
 	.content{
+		width: 100%;
 		overflow-y: auto;
 	}
 	.content ul{
-		width: 100%;
+		/*width: 100%;*/
 	}
 	.footer{
 	    width: 100%;
@@ -76,7 +91,7 @@
 		text-indent: 20px;
 	}
 	.send-btn-td{
-		background: rgb(24, 56, 80);
+		background: rgb(85, 101, 121);
 		border-radius: 3px;
 		border: none;
 	}
@@ -89,9 +104,10 @@
 		display: inline-block;
 	}
 	li{
+		display: block;
 		list-style: none;
 		padding: 10px 40px;
-		position: relative;
+		/*position: relative;*/
 	}
 	.other{
 		text-align: left;
@@ -115,13 +131,14 @@
 	    color: #717171;
 	    text-align: left;
 	    position: relative;
+	    font-size: 14px;
 	}
 	.other span:before{
 		content: '';
 		display: block;
 		position: absolute;
 		left: -18px;
-		top: 4px;
+		top: 7px;
 		width: 0px;
 		border-width: 9px;
 		border-style: solid;
@@ -138,8 +155,8 @@
 		background: #fff;
 		display: inline-block;
 		position: absolute;
-		top: 0;
 		right: 40px;
+		font-size: 14px;
 	}
 	.me span{
 	    display: inline-block;
@@ -157,7 +174,7 @@
 		display: block;
 		position: absolute;
 		right: -18px;
-		top: 4px;
+		top: 7px;
 		width: 0px;
 		border-width: 9px;
 		border-style: solid;
@@ -204,14 +221,14 @@
 	      var msg = {
 	        toUser: this.toUser,
 	        frUser: this.frUser,
-	        group: this.toUser.userId,
+	        group: this.toUser.userId + this.frUser.userId,
 	        content: this.content,
 	        type: this.type
 	      }
 	      this.httpServer.emit('sendTo', msg)
 	      // this.msgList.push(msg)
-	      msg.self = true
-	      this.msgList.push(msg)
+	      // msg.self = true
+	      // this.msgList.push(msg)
 	      this.content = ''
 	    }
 	  },
