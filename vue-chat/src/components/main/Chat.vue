@@ -214,10 +214,10 @@
 	    // 连接
 	    // this.setUserName()
 	    this.toBottom()
-	    const that = this
-	    window.onresize = () => {
-	      that.$refs.chatContent.style.height = window.innerHeight - 100 + 'px'
-	    }
+	    // const that = this
+	    // window.onresize = () => {
+	    //   that.$refs.chatContent.style.height = window.innerHeight - 100 + 'px'
+	    // }
 	  }
 	}
 </script>

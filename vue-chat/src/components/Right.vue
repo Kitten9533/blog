@@ -246,8 +246,8 @@
 	            // 由于javascript的限制，vue不能检测以下变动的数组
 	            // 1.当你利用索引直接设置一个项时， vm.items[index] = newValue
 	            // 2.当你修改数组的长度时，vm.items.length = newLength
+	            let obj = this.onlineList[i]
 	            this.onlineList.splice(i, 1)
-	            let obj = msg.frUser
 	            obj.content = msg.content
 	            this.onlineList.splice(0, 0, obj)
 	          }

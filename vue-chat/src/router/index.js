@@ -7,6 +7,8 @@ import Cover from '@/components/Cover'
 import Chat from '@/components/main/Chat'
 import Pm from '@/components/main/Pm'
 import Right from '@/components/Right'
+import Upload from '@/components/Upload'
+import Upload2 from '@/components/main/Upload2'
 
 Vue.use(VueResource)
 Vue.use(Router)
@@ -35,6 +37,14 @@ export default new Router({
       {
         path: 'pm',
         component: Pm
+      },
+      {
+        path: 'upload',
+        component: Upload
+      },
+      {
+        path: 'upload2',
+        component: Upload2
       }]
     },
     {
