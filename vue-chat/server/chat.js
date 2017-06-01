@@ -57,8 +57,8 @@ io.on('connection', function (socket) {
 		if(toSocket = _.findWhere(io.sockets.sockets,{socketId: toUser})){
 			// 发给别人   group相当于群组   私聊时为接收人的id， 群聊时为群组id
             toSocket.emit('getMsg', {toUser: msg.toUser,frUser: msg.frUser, group: msg.group, content: msg.content, type: msg.type});
-            socket.emit('getMsg', {toUser: msg.toUser,frUser: msg.frUser, group: msg.group, content: msg.content, type: msg.type});
         }
+        socket.emit('getMsg', {toUser: msg.toUser,frUser: msg.frUser, group: msg.group, content: msg.content, type: msg.type});
 	})
 });
 

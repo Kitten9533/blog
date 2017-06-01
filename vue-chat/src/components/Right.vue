@@ -21,7 +21,7 @@
 					<div class="userimg-box">
 						<img class="userimg" v-bind:src="!!item.userImg ? item.userImg : '/static/imgs/default.png'"/>
 					</div>
-					<p class="username" v-text="item.userName"><span class="status iconfont icon-yuanhuan white"></span></p>
+					<p class="username">{{item.userName}}<span class="status iconfont icon-yuanhuan white"></span></p>
 					<p class="content" v-text="item.content"></p>
 				</li>
 			</ul>
@@ -170,6 +170,7 @@
 
 <script>
 	// import io from '../../static/js/socket.io'
+	import { mapGetters } from 'vuex'
 	export default{
 	  data () {
 	    // this.connect()
@@ -181,6 +182,14 @@
 	      showOffline: true,
 	      currentUser: {userId: '', userName: ''}
 	    }
+	  },
+	  watch: {
+	    height () {
+	      this.initStyle()
+	    }
+	  },
+	  computed: {
+	    ...mapGetters({height: 'getWInnerHeight'})
 	  },
 	  methods: {
 	    initStyle () {
@@ -226,7 +235,6 @@
 	        self.offlineList = offline
 	      })
 	      this.httpServer.on('getMsg', (msg) => {
-	        console.log(msg)
 	        for (let i = 0; i < this.onlineList.length; i++) {
 	          if (this.onlineList[i].userId === msg.frUser.userId && this.currentUser.userId !== msg.frUser.userId) {
 	            // this.onlineList[i].content = msg.content
@@ -263,11 +271,11 @@
 	  mounted () {
 	    this.connect()
 	    this.initStyle()
-	    window.onresize = () => {
-	      return (() => {
-	        this.initStyle()
-	      })()
-	    }
+	    // window.onresize = () => {
+	    //   return (() => {
+	    //     this.initStyle()
+	    //   })()
+	    // }
 	  }
 	}
 </script>

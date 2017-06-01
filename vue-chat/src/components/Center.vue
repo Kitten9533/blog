@@ -40,22 +40,31 @@
 </style>
 
 <script>
+	import { mapGetters } from 'vuex'
 	export default{
 	  data () {
 	    return {}
 	  },
 	  props: ['centerName', 'toUser', 'frUser'],
+	  computed: {
+	    ...mapGetters({height: 'getWInnerHeight'})
+	  },
+	  watch: {
+	    height () {
+	      this.changeMain()
+	    }
+	  },
 	  methods: {
 	    changeMain () {
 	      this.$refs.main.style.height = window.innerHeight - 60 + 'px'
 	    }
 	  },
 	  mounted () {
-	    const that = this
 	    this.changeMain()
-	    window.onresize = () => {
-	      that.$refs.main.style.height = window.innerHeight - 60 + 'px'
-	    }
+	    // const that = this
+	    // window.onresize = () => {
+	    //   that.$refs.main.style.height = window.innerHeight - 60 + 'px'
+	    // }
 	  }
 	}
 </script>

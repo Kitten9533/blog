@@ -1,4 +1,4 @@
-<template>
+ <template>
 	<div class="box" ref="box">
 		<div class="top">
 			<p v-text="this.toUser.userId ? toUser.userName : '请先选择联系人'"></p>
@@ -193,7 +193,10 @@
 </style>
 
 <script>
+	// import store from '../../store/store'
 	// import io from '../../../static/js/socket.io'
+	// import { mapActions } from 'vuex'
+	import { mapGetters } from 'vuex'
 	export default{
 	  data () {
 	    return {
@@ -209,7 +212,13 @@
 	        this.$refs.content.scrollTop = height
 	        this.content = ''
 	      })
+	    },
+	    height () {
+	      this.$refs.content.style.height = window.innerHeight - 180 + 'px'
 	    }
+	  },
+	  computed: {
+	    ...mapGetters({height: 'getWInnerHeight'})
 	  },
 	  methods: {
 	    init () {
@@ -230,21 +239,19 @@
 	        type: this.type
 	      }
 	      this.httpServer.emit('sendTo', msg)
-	      // this.msgList.push(msg)
-	      // msg.self = true
-	      // this.msgList.push(msg)
 	      this.content = ''
 	    }
+	    // ...mapActions(['setHeight'])
 	  },
 	  props: ['toUser', 'frUser'],
 	  mounted () {
 	    this.$refs.content.style.height = window.innerHeight - 180 + 'px'
-	    const that = this
-	    window.onresize = () => {
-	      return (() => {
-	        that.$refs.content.style.height = window.innerHeight - 180 + 'px'
-	      })()
-	    }
+	    // const that = this
+	    // window.onresize = () => {
+	    //   return (() => {
+	    //     that.$refs.content.style.height = window.innerHeight - 180 + 'px'
+	    //   })()
+	    // }
 	    this.init()
 	  }
 	}

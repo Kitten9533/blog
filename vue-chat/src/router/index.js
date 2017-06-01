@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Vuex from 'vuex'
 import VueResource from 'vue-resource'
 // import Hello from '@/components/Hello'
 import Cover from '@/components/Cover'
@@ -9,6 +10,7 @@ import Right from '@/components/Right'
 
 Vue.use(VueResource)
 Vue.use(Router)
+Vue.use(Vuex)
 
 export default new Router({
   routes: [

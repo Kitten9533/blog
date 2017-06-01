@@ -6,9 +6,29 @@
 </template>
 
 <script>
+import store from './store/store'
 export default {
+  store,
   name: 'app'
 }
+
+// 高度调整
+// var resizeTime = null
+// window.onresize = () => {
+//   if (resizeTime) {
+//     clearTimeout(resizeTime)
+//   }
+//   resizeTime = setTimeout(() => {
+//     store.commit('change')
+//     store.dispatch('setHeight')
+//   }, 500)
+// }
+
+window.onresize = () => {
+  store.commit('change')
+  // store.dispatch('setHeight')
+}
+
 </script>
 
 <style>
