@@ -33,6 +33,7 @@
 	.box{
 		width:100%;
 		height: 100%;
+		min-width: 290px;
 		padding: 0;
 	    margin: 0;
 	    background: linear-gradient(-45deg, #586A7E 0, #4B5668 25%, #38414A 50%, #2A313B 75%, #262D37 100%);

@@ -12,7 +12,7 @@
 				v-if="item.group == toUser.userId + frUser.userId || item.group == frUser.userId + toUser.userId">
 <!-- 					<p>{{item.toUser.userId}}  {{toUser.userId}}  {{frUser.userId}}</p> -->
 					<img v-bind:src="!!item.toUser.userImg ? item.toUser.userImg : '/static/imgs/default.png'"/>
-					<p v-html="!!item.content ? item.content : '&nbsp;'"></p>
+					<span v-html="!!item.content ? item.content : '&nbsp;'"></span>
 				</li>
 			</ul>
 		</div>
@@ -34,7 +34,7 @@
 </template>
 
 <style scoped>
-	li p{
+	li span{
 		word-wrap:break-word;white-space:normal;max-width: 500px;
 	}
 	a::selection{
@@ -108,7 +108,7 @@
 		display: block;
 		list-style: none;
 		padding: 10px 40px;
-		/*position: relative;*/
+		position: relative;
 	}
 	.other{
 		text-align: left;
@@ -122,7 +122,7 @@
 		display: inline-block;
 		position: absolute;
 	}
-	.other p{
+	.other span{
 	    display: inline-block;
 	    margin-left: 50px;
 	    padding: 8px 10px;
@@ -134,7 +134,7 @@
 	    position: relative;
 	    font-size: 14px;
 	}
-	.other p:before{
+	.other span:before{
 		content: '';
 		display: block;
 		position: absolute;
@@ -159,7 +159,7 @@
 		right: 40px;
 		font-size: 14px;
 	}
-	.me p{
+	.me span{
 	    display: inline-block;
 	    margin-right: 50px;
 	    padding: 8px 10px;
@@ -170,7 +170,7 @@
 	    text-align: left;
 	    position: relative;
 	}
-	.me p:after{
+	.me span:after{
 		content: '';
 		display: block;
 		position: absolute;
