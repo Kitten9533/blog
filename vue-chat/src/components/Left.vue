@@ -74,7 +74,8 @@
 	        {name: 'Music', link: '/cover', active: false},
 	        {name: 'Links', link: '/cover', active: false},
 	        {name: 'Upload', link: '/cover/upload', active: false},
-	        {name: 'Upload2', link: '/cover/upload2', active: false}
+	        {name: 'Upload2', link: '/cover/upload2', active: false},
+	        {name: 'Upload3', link: '/cover/upload3', active: false}
 	      ]
 	    }
 	  },

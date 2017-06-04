@@ -9,6 +9,7 @@ import Pm from '@/components/main/Pm'
 import Right from '@/components/Right'
 import Upload from '@/components/Upload'
 import Upload2 from '@/components/main/Upload2'
+import Upload3 from '@/components/main/Upload3'
 
 Vue.use(VueResource)
 Vue.use(Router)
@@ -45,6 +46,10 @@ export default new Router({
       {
         path: 'upload2',
         component: Upload2
+      },
+      {
+        path: 'upload3',
+        component: Upload3
       }]
     },
     {
