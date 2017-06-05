@@ -70,8 +70,8 @@
 		left: 50%; top: 50%;
 		cursor: pointer;
 		opacity: 0.7;
-		margin-left: -95px;
-		margin-top: -95px;
+		margin-left: -100px;
+		margin-top: -100px;
 	}
 	.modal-border{
 		position: absolute;
@@ -83,6 +83,7 @@
 		z-index: 100;
 		border: 5px solid #fff;
 		cursor: pointer;
+		box-sizing: border-box;
 		/*padding: 10px;*/
 		outline: 2px dotted #fff;
 	}
@@ -97,12 +98,9 @@
 		z-index: 100;
 		/*border: 1px solid #fff;*/
 	}
-/*	.preview-img:before{
-		content: '100 X 100';
-		position: absolute;
-		top: -25px;
-		left: 0;
-	}*/
+	.preview-img{
+		border-radius: 100px;
+	}
 	.modal-border:before{
 		content: '200 X 200';
 		position: absolute;
@@ -176,8 +174,8 @@
 	      curWidth: 0,
 	      curHeight: 0,
 	      barleft: 0,
-	      imgMarginLeft: 0,
-	      imgMarginTop: 0,
+	      imgMarginLeft: -100,
+	      imgMarginTop: -100,
 	      zoom: 1,
 	      srcImg: null,
 	      srcWidth: 0,
@@ -262,6 +260,8 @@
 	      }
 	      this.screenShot = true
 	      this.imgPreview(this.file)
+	      // 初始化zoom
+	      this.zoom = 1
 	    },
 	    imgPreview (file) { // 图片预览
 	      let self = this
@@ -271,6 +271,7 @@
 	      let reader = new FileReader()
 	      reader.readAsDataURL(file)
 	      this.image = new Image()
+	      this.srcImg = new Image()
 	      reader.onloadend = function () {
 	        self.src = this.result
 	        self.shotSrc = this.result
@@ -282,14 +283,14 @@
 	        self.$refs.pic.width = 200
 	        // self.$refs.pic.height = '200'
 	        self.image.onload = function () {
-	          // self.$refs.pic.style.marginLeft = self.image.width / -2.0 + 5 + 'px'
-	          // self.$refs.pic.style.marginTop = self.image.height / -2.0 + 5 + 'px'
 	          self.curWidth = self.$refs.pic.width
 	          self.curHeight = self.$refs.pic.height
 	        }
 	        self.srcImg.onload = () => {
 	          self.srcWidth = self.srcImg.width
 	          self.srcHeight = self.srcImg.height
+	          self.$refs.pic.style.marginLeft = '-100px'
+	          self.$refs.pic.style.marginTop = '-100px'
 	        }
 	      }
 	    },
@@ -321,7 +322,7 @@
 	      console.log(top)
 	      let scale = 200 / this.srcImg.width * this.zoom
 	      console.log(scale)
-	      this.context.drawImage(this.image, left / scale, top / scale, 200 / scale, 200 / scale, 0, 0, 200, 200)
+	      this.context.drawImage(this.srcImg, left / scale, top / scale, 200 / scale, 200 / scale, 0, 0, 200, 200)
 	      // 图片显示的时候即为 宽度为200的所以缩放比例为  200/this.image.width
 	      // 通过调大小后 缩放比例为this.zoom
 	      // 最终为 200/this.image.width*this.zoom
