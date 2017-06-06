@@ -29,7 +29,7 @@
 </template>
 
 <style scoped>
-  	@import '/static/css/style.css';
+  	/*@import '/static/css/style.css';*/
 	.chat-box{
 		height: 100%;
 	}

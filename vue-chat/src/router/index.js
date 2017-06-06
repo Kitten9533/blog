@@ -10,6 +10,7 @@ import Right from '@/components/Right'
 import Upload from '@/components/Upload'
 import Upload2 from '@/components/main/Upload2'
 import Upload3 from '@/components/main/Upload3'
+import Index from '@/components/Responsive/index'
 
 Vue.use(VueResource)
 Vue.use(Router)
@@ -24,6 +25,11 @@ export default new Router({
     // },
     {
       path: '/',
+      name: 'Index',
+      component: Index
+    },
+    {
+      path: '/chat',
       name: 'Chat',
       component: Chat
     },
