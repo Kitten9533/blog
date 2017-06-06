@@ -1,6 +1,6 @@
 <template>
 	<div class="container" style="color:#fff;">
-		<table class="box" cellspacing="1" cellpadding="0">
+		<table class="box" cellspacing="0" cellpadding="0">
 			<tr>
 				<td width="180" class="left-td">
 					<left v-on:setName="setName"></left>

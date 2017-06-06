@@ -1,11 +1,14 @@
 <template>
 	<div class="box">
 		<div class="main">
-			<label for="file">
+			<h4>图片上传</h4>
+			<label for="file" class="img-label">
 				<img width="200" height="200" :src="src ? src : '/static/imgs/upload.png'"/>
 			</label>
 			<input id="file" type="file" name="file" @change='imgChange' hidden="">
-			<img class="preview-img" width="100" height="100" :src="complete && src ? src : '/static/imgs/upload.png'"/>
+			<div class="preview-img-box">
+				<img class="preview-img" width="100" height="100" :src="complete && src ? src : '/static/imgs/upload.png'"/>
+			</div>
 		</div>
 		<div class="screen-shot" v-if="screenShot">
 			<canvas id="canvas" ref="canvas" width="200" height="200" style="float:right" hidden=""></canvas>
@@ -38,13 +41,43 @@
 		height: 100%;
 	}
 	.main{
-		width: 400px;
+		width: 600px;
 		height: 400px;
+		margin: 0 auto;
+	}
+	h4{
+		margin-bottom: 25px;
+		font-weight: 500;
+	}
+	.img-label{
+		cursor: pointer;
+		position: relative;
+	}
+	.img-label:after{
+		content: '200 X 200';
 		position: absolute;
-		left: 50%;top: 50%;
-		margin-left: -200px;
-		margin-top: -200px;
-		/*border: 1px solid #fff;*/
+		left: 50%;
+		bottom: -20px;
+		font-size: 12px;
+		margin-left: -28px;
+	}
+	.preview-img{
+		border-radius: 100px;
+	}
+	.preview-img-box{
+		width: 100px;
+		height: 100px;
+		margin-left: 50px;
+		display: inline-block;
+		position: relative;
+	}
+	.preview-img-box:after{
+		content: '100 X 100';
+		position: absolute;
+		left: 50%;
+		bottom: -20px;
+		margin-left: -28px;
+		font-size: 12px;
 	}
 	.screen-shot{
 		position: fixed;
@@ -98,9 +131,6 @@
 		z-index: 100;
 		/*border: 1px solid #fff;*/
 	}
-	.preview-img{
-		border-radius: 100px;
-	}
 	.modal-border:before{
 		content: '200 X 200';
 		position: absolute;
@@ -137,7 +167,7 @@
       	width: 20px;
       	height: 20px;
       	border-radius: 10px;
-      	background: #fff;
+      	background: rgb(255,104,56);
       	position: absolute;
       	top: -7px;
       	left: 0;

@@ -36,9 +36,10 @@
 		min-width: 290px;
 		padding: 0;
 	    margin: 0;
-	    background: linear-gradient(-45deg, #586A7E 0, #4B5668 25%, #38414A 50%, #2A313B 75%, #262D37 100%);
+/*	    background: linear-gradient(-45deg, #586A7E 0, #4B5668 25%, #38414A 50%, #2A313B 75%, #262D37 100%);
 	    background: -moz-linear-gradient(-45deg, #586A7E 0, #4B5668 25%, #38414A 50%, #2A313B 75%, #262D37 100%);
-	    background: -webkit-linear-gradient(-45deg, #586A7E 0, #4B5668 25%, #38414A 50%, #2A313B 75%, #262D37 100%);
+	    background: -webkit-linear-gradient(-45deg, #586A7E 0, #4B5668 25%, #38414A 50%, #2A313B 75%, #262D37 100%);*/
+	    background: #333333;
 	    background-repeat: no-repeat;
 	    background-attachment: fixed;
 	    border-left: 1px solid #5a5959;
@@ -65,7 +66,7 @@
 	.search-btn{
 		width:260px;
 		border: none;
-		background: rgb(87,99,121);
+		background: rgb(153, 153, 153);
 		border-radius: 6px;
 		outline: none;
 		text-indent: 20px;

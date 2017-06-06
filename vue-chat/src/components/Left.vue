@@ -13,9 +13,11 @@
 		height: 100%;
 		padding: 0;
 	    margin: 0;
-	    background: linear-gradient(-65deg, #586A7E 0, #4B5668 25%, #38414A 50%, #2A313B 75%, #262D37 100%);
+/*	    background: linear-gradient(-65deg, #586A7E 0, #4B5668 25%, #38414A 50%, #2A313B 75%, #262D37 100%);
 	    background: -moz-linear-gradient(-65deg, #586A7E 0, #4B5668 25%, #38414A 50%, #2A313B 75%, #262D37 100%);
 	    background: -webkit-linear-gradient(-65deg, #586A7E 0, #4B5668 25%, #38414A 50%, #2A313B 75%, #262D37 100%);
+	    */
+	    background: #999999;
 	    background-repeat: no-repeat;
 	    background-attachment: fixed;
 	    overflow-x: hidden;
@@ -37,8 +39,8 @@
 		line-height: 100px;
 	}
 	.active{
-		border-left: 3px solid rgb(53,166,242);
-		background: rgb(47,54,64);
+	    /*border-left: 3px solid rgb(51, 51, 51);*/
+	    background: rgb(204, 204, 204);
 	}
 	::selection{
 		color:#fff;
@@ -74,7 +76,7 @@
 	        {name: 'Music', link: '/cover', active: false},
 	        {name: 'Links', link: '/cover', active: false},
 	        {name: 'Upload', link: '/cover/upload', active: false},
-	        {name: 'Upload2', link: '/cover/upload2', active: false},
+	        // {name: 'Upload2', link: '/cover/upload2', active: false},
 	        {name: 'Upload3', link: '/cover/upload3', active: false}
 	      ]
 	    }
