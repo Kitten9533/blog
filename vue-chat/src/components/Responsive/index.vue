@@ -1,6 +1,6 @@
 <template>
-<div>
-	<nav class="navbar navbar-default navbar-fixed-top">
+<div class="fullHeight">
+	<nav class="navbar navbar-default">
 	  <div class="container-fluid">
 	  <div class="row">
 	  <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
@@ -56,62 +56,66 @@
 	    </div>
 	  </div>
 	</nav>
-	<div class="container-fluid">
-		<div class="row">
-		<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 column nopadding">
-			<div class="carousel slide" id="carousel-119615">
-				<ol class="carousel-indicators">
-					<li class="active" data-slide-to="0" data-target="#carousel-119615">
-					</li>
-					<li data-slide-to="1" data-target="#carousel-119615">
-					</li>
-					<li data-slide-to="2" data-target="#carousel-119615">
-					</li>
-				</ol>
-				<div class="carousel-inner">
-					<div class="item active">
-						<img alt="" src="../../../static/imgs/bg.jpg" class="img-responsive" />
-						<div class="carousel-caption">
-							<h4>
-								First Thumbnail label
-							</h4>
-							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
+	<div class="container-fluid fullHeight maxHeight">
+		<div class="row bg fullHeight">
+			<div class="col-md-5 noPadding fullHeight">
+			</div>
+			<div class="col-md-7 noPadding fullHeight">
+				<div class="jumbotron fullHeight">
+					<div class="container fullHeight">
+						<div>
+							<h1>Welocme</h1>
+						  	<p>What can we help you with</p>
+						  	<p><a class="btn btn-success btn-lg" href="#" role="button">Learn More</a></p>
+						  	<div class="input-group">
+							<input type="text" class="form-control" placeholder="Email Address" aria-describedby="basic-addon2" v-model="email" @keyup.13="sendEmail">
+							  <span class="input-group-addon btn" @click="sendEmail" id="basic-addon2">START YOUR TRIAL</span>
+							</div>
+							<div :class="['alert', {'alert-success': emailRes.code}, {'alert-danger': !emailRes.code}]" role="alert" v-text="emailRes.msg">Send Successful</div>
 						</div>
 					</div>
-					<div class="item">
-						<img alt="" src="../../../static/imgs/background2.jpg" class="img-responsive" />
-						<div class="carousel-caption">
-							<h4>
-								Second Thumbnail label
-							</h4>
-							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-						</div>
-					</div>
-					<div class="item">
-						<img alt="" src="../../../static/imgs/bg.jpg" class="img-responsive"/>
-						<div class="carousel-caption">
-							<h4>
-								Third Thumbnail label
-							</h4>
-							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-						</div>
-					</div>
-				</div> 
-				<a class="left carousel-control" href="#carousel-119615" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-119615" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </div>
 </template>
 
 <style scoped>
+	.navbar{
+		background: #fff;
+	}
+	.navbar-default 
+	.navbar-nav>.active>a, 
+	.navbar-default 
+	.navbar-nav>.active>a:focus, 
+	.navbar-default {
+		background: #fff;
+		transition: all 0.3s ease-in-out;
+	}
+	.navbar-nav>.active>a:hover{
+		background: #e7e7e7;
+		transition: all 0.3s ease-in-out;
+	}
+	.navbar-nav>li>a,
+	.navbar-nav>li>a:focus{
+		background: #fff;
+		transition: all 0.3s ease-in-out;
+	}
+	.navbar-nav>li>a:hover{
+		background: #e7e7e7 !important;
+		transition: all 0.3s ease-in-out;
+	}
+	.navbar-nav>.active>a:before{
+		content: '';
+		display: block;
+		width: 100%;
+		height: 2px;
+		background: rgb(91,122,222);
+		position: absolute;
+		margin-left: -15px;
+		bottom: 0;
+	}
 	.navbar-default .navbar-nav>li>a,
 	.navbar-default .navbar-nav>li>a:link,
 	.navbar-default .navbar-nav>li>a:visited,
@@ -129,7 +133,8 @@
 		margin-left: -15px;
 		margin-top: -2px;
 		position: absolute;
-		background: #999;
+		/*background: rgb(51,122,123);*/
+		background: rgb(91,122,222);
 		transition: all 0.3s ease-in-out;
 		box-sizing: border-box;
 
@@ -140,18 +145,62 @@
 	.navbar{
 		margin-bottom: 0;
 	}
-	.nopadding{
-		padding:0;
+	.fullHeight{
+		height: 100%;
 	}
-	item img{
-		width: 100%;
+	.noPadding{
+		padding: 0;
+	}
+	.minHeight{
+		min-height: 600px;
+	}
+	.maxHeight{
+		max-height: 600px;
+	}
+	.bg{
+		background: url('../../../static/imgs/bg.jpg') 100% 100% no-repeat;
+	}
+	.container .jumbotron, .container-fluid .jumbotron{
+		border-radius: 0;
+	}
+	.jumbotron{
+		margin-bottom: 0;
+		background: rgba(0,0,0,0.1);
+		position: relative;
+	}
+	.jumbotron h1{
+		margin-top: 60px;
+		margin-bottom: 30px;
+		line-height: 100px;
+	}
+	.alert{
+		/*margin-top: 5px;*/
 	}
 </style>
 
 <script>
 	export default{
 	  data () {
-	    return {}
+	    return {
+	      email: '',
+	      emailRes: {
+	        code: 1, // 1成功 0失败
+	        msg: 'Send Successful' // Fail in Send
+	      }
+	    }
+	  },
+	  methods: {
+	    sendEmail () {
+	      var reg = new RegExp(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/)
+	      if (reg.test(this.email)) {
+	        // TODO调用发送邮件
+	        this.emailRes.code = 1
+	        this.emailRes.msg = '发送中...'
+	      } else {
+	        this.emailRes.code = 0
+	        this.emailRes.msg = '邮箱格式不正确'
+	      }
+	    }
 	  }
 	}
 </script>
