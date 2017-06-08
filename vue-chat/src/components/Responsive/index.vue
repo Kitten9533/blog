@@ -194,6 +194,14 @@
 	      var reg = new RegExp(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/)
 	      if (reg.test(this.email)) {
 	        // TODO调用发送邮件
+	        // let data = {email: this.email}
+	        this.$http.get('/api/send_trail_mail?email=' + this.email)
+	          .then((response) => {
+	            console.log(response)
+	          })
+	          .then((reject) => {
+	            console.log(reject)
+	          })
 	        this.emailRes.code = 1
 	        this.emailRes.msg = '发送中...'
 	      } else {

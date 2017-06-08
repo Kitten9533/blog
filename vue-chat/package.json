@@ -11,6 +11,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "body-parser": "^1.17.2",
     "jquery": "^3.2.1",
     "log4js": "^1.1.1",
     "md5": "^2.2.1",

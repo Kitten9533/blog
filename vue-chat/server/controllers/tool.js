@@ -1,1 +1,1 @@
-tool.js
+var mail = require('../common/mail');
