@@ -1,4 +1,5 @@
 var mail = require('../common/mail');
+var rebot = require('../common/rebot');
 var validator = require('validator');
 
 var sendTrailMail = function (req, res) {
@@ -15,3 +16,9 @@ var sendTrailMail = function (req, res) {
 	}
 }
 exports.sendTrailMail = sendTrailMail;
+
+var sendToRebot = function (req, res) {
+	console.log('colltrollers sendToRebot');
+	rebot.sendToRebot(req,res);
+}
+exports.sendToRebot = sendToRebot;

@@ -17,8 +17,9 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
-	        <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-	        <li><a href="#">Chat</a></li>
+	      	<li v-for="(item, index) in top" :class="{active: item.active}" @click="changeAcitve(index)"><a :href="item.href" v-html="item.text"></a></li>
+<!-- 	        <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+	        <li><a href="#">Chat</a></li> -->
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
@@ -71,13 +72,19 @@
 							<input type="text" class="form-control" placeholder="Email Address" aria-describedby="basic-addon2" v-model="email" @keyup.13="sendEmail">
 							  <span class="input-group-addon btn" @click="sendEmail" id="basic-addon2">START YOUR TRIAL</span>
 							</div>
-							<div :class="['alert', {'alert-success': emailRes.code}, {'alert-danger': !emailRes.code}]" role="alert" v-text="emailRes.msg">Send Successful</div>
+							<transition name="fade">
+								<div v-if="showRes" ref="emailRes" :class="['alert', {'alert-success': emailRes.code}, {'alert-danger': !emailRes.code}]" role="alert" v-text="emailRes.msg">Send Successful</div>
+							</transition>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="page-header" style="text-align:center">
+	  <h1>Example page header <small>Subtext for header</small></h1>
+	</div>
+	<notice></notice>
 </div>
 </template>
 
@@ -158,7 +165,10 @@
 		max-height: 600px;
 	}
 	.bg{
-		background: url('../../../static/imgs/bg.jpg') 100% 100% no-repeat;
+		background-image: url('../../../static/imgs/bg.jpg');
+		background-size: cover;
+		-moz-background-size: cover;
+		-webkit-background-size: cover;
 	}
 	.container .jumbotron, .container-fluid .jumbotron{
 		border-radius: 0;
@@ -179,35 +189,68 @@
 </style>
 
 <script>
+	import notice from './notice.vue'
 	export default{
 	  data () {
 	    return {
+	      top: [{
+	        text: 'Overview <span class="sr-only">(current)',
+	        href: '#',
+	        active: true
+	      },
+	      {
+	        text: 'Chat',
+	        href: '#',
+	        active: false
+	      }],
 	      email: '',
 	      emailRes: {
 	        code: 1, // 1成功 0失败
 	        msg: 'Send Successful' // Fail in Send
-	      }
+	      },
+	      showRes: false
 	    }
 	  },
+	  components: {
+	    notice: notice
+	  },
 	  methods: {
+	    changeAcitve (index) {
+	      for (let i = 0; i < this.top.length; i++) {
+	        this.top[i].active = false
+	      }
+	      this.top[index].active = true
+	    },
 	    sendEmail () {
+	      this.showRes = true
+	      this.emailRes = {
+	        code: 1,
+	        msg: '发送中...'
+	      }
 	      var reg = new RegExp(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/)
 	      if (reg.test(this.email)) {
 	        // TODO调用发送邮件
 	        // let data = {email: this.email}
 	        this.$http.get('/api/send_trail_mail?email=' + this.email)
 	          .then((response) => {
-	            console.log(response)
+	            this.emailRes = response.body
+	            this.hideEmailRes()
 	          })
-	          .then((reject) => {
-	            console.log(reject)
+	          .catch((reject) => {
+	            this.emailRes = reject.body
+	            this.hideEmailRes()
 	          })
-	        this.emailRes.code = 1
-	        this.emailRes.msg = '发送中...'
 	      } else {
 	        this.emailRes.code = 0
 	        this.emailRes.msg = '邮箱格式不正确'
+	        this.hideEmailRes()
 	      }
+	    },
+	    hideEmailRes () {
+	      var self = this
+	      setTimeout(function () {
+	        self.showRes = false
+	      }, 2000)
 	    }
 	  }
 	}

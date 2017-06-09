@@ -12,6 +12,9 @@ var config  = {
 	      pass: 'Jiang199455'
 	    },
 	    secure: true,
+	},
+	rebot: {
+		key: '7e4a79e3e5fc4f63b7d87d68e5802bc8'
 	}
 }
 

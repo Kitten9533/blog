@@ -52,7 +52,7 @@ var sendMail = function (data, req, res) {
 		}
 		logger.info('send mail success at ' + new Date());
 		res.json({
-      		code: 0,
+      		code: 1,
       		msg: util.format('send mail success at %s', new Date())
       	});
 		return {
