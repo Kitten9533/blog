@@ -2,7 +2,16 @@
 	<div>
 		<transition name="fade">
 			<div class="chat-box" v-if="showChat">
-				chat-box
+				<div class="chat-top">top</div>
+				<div class="chat-content">content</div>
+				<div class="chat-footer">
+					<div class="send-left">
+						<input class="send-content" type="text" name="content"/>
+					</div>
+					<div class="send-right">
+						<span class="send-btn">发送</span>
+					</div>
+				</div>
 			</div>
 		</transition>
 		<div class="notice" @click="showChat=!showChat">
@@ -20,8 +29,55 @@
 	}
 	.chat-box{
 		position: fixed;
-		bottom: 110px;
+		z-index: 10;
+		bottom: 120px;
 		right: 60px;
+		border: 1px solid rgba(92, 184, 92, 1);
+		height: 350px;
+		width: 250px;
+		border-radius: 5px;
+		box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0px rgba(0, 0, 0, 0.3);
+	}
+	.chat-box:after{
+		content: '';
+		display: block;
+		width: 0;
+		height: 0;
+		position: absolute;
+		bottom: -20px;
+		border-width: 10px;
+		right: 0;
+		/*
+		border-color: rgba(255,255,255,1) transparent transparent transparent;*/
+		border-color: rgba(92, 184, 92, 0.5) transparent transparent transparent;
+	}
+	.chat-top{
+		height: 40px;
+		background: rgba(92, 184, 92, 0.5);
+	}
+	.chat-content{
+		height: 270px;
+	}
+	.chat-footer{
+		height: 40px;
+		display: table;
+		width: 100%;
+	}
+	.chat-footer div{
+		display: table-cell;
+		height: 40px;
+	}
+	.chat-footer div>input, .chat-footer div>a{
+		height: 40px;
+		width: 100%;
+		border: none;
+		box-sizing: border-box;
+	}
+	.send-btn{
+		line-height: 40px;
+		width: 60px;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 	.notice{
 		background: rgba(92, 184, 92, 0.5);

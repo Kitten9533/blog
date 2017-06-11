@@ -57,11 +57,11 @@
 	    </div>
 	  </div>
 	</nav>
-	<div class="container-fluid fullHeight">
+	<div class="container-fluid minHeight fullHeight">
 		<div class="row bg fullHeight">
 			<div class="col-md-7 col-md-offset-5 noPadding fullHeight">
 				<div class="jumbotron fullHeight">
-					<div class="container">
+					<div class="container jumbotron-box">
 						<div class="jumbotron-div">
 							<h1>Welocme</h1>
 						  	<p>What can we help you with</p>
@@ -200,7 +200,7 @@
 		min-height: 600px;
 	}
 	.maxHeight{
-		/*max-height: 600px;*/
+		max-height: 600px;
 	}
 	.bg{
 		background: url('../../../static/imgs/bg.jpg') center center;
@@ -221,8 +221,11 @@
 		margin-bottom: 30px;
 		line-height: 100px;
 	}
-	.alert{
-		/*margin-top: 5px;*/
+	.jumbotron-box{
+		height: 100%;
+	}
+	.jumbotron-div{
+		margin-top: 200px;
 	}
 </style>
 
