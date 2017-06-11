@@ -1,6 +1,6 @@
 <template>
 <div class="fullHeight">
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default navbar-fixed-top">
 	  <div class="container-fluid">
 	  <div class="row">
 	  <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
@@ -57,14 +57,12 @@
 	    </div>
 	  </div>
 	</nav>
-	<div class="container-fluid fullHeight maxHeight">
+	<div class="container-fluid fullHeight">
 		<div class="row bg fullHeight">
-			<div class="col-md-5 noPadding fullHeight">
-			</div>
-			<div class="col-md-7 noPadding fullHeight">
+			<div class="col-md-7 col-md-offset-5 noPadding fullHeight">
 				<div class="jumbotron fullHeight">
-					<div class="container fullHeight">
-						<div>
+					<div class="container">
+						<div class="jumbotron-div">
 							<h1>Welocme</h1>
 						  	<p>What can we help you with</p>
 						  	<p><a class="btn btn-success btn-lg" href="#" role="button">Learn More</a></p>
@@ -81,14 +79,54 @@
 			</div>
 		</div>
 	</div>
-	<div class="page-header" style="text-align:center">
-	  <h1>Example page header <small>Subtext for header</small></h1>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 column">
+				<h2>
+					Heading
+				</h2>
+				<p>
+					Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+				</p>
+				<p>
+					 <a class="btn" href="#">View details »</a>
+				</p>
+			</div>
+			<div class="col-md-4 column">
+				<h2>
+					Heading
+				</h2>
+				<p>
+					Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+				</p>
+				<p>
+					 <a class="btn" href="#">View details »</a>
+				</p>
+			</div>
+			<div class="col-md-4 column">
+				<h2>
+					Heading
+				</h2>
+				<p>
+					Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+				</p>
+				<p>
+					 <a class="btn" href="#">View details »</a>
+				</p>
+			</div>
+		</div>
 	</div>
 	<notice></notice>
 </div>
 </template>
 
 <style scoped>
+	.fade-enter-active, .fade-leave-active {
+	  transition: opacity .5s
+	}
+	.fade-enter, .fade-leave-active {
+	  opacity: 0
+	}
 	.navbar{
 		background: #fff;
 	}
@@ -162,10 +200,10 @@
 		min-height: 600px;
 	}
 	.maxHeight{
-		max-height: 600px;
+		/*max-height: 600px;*/
 	}
 	.bg{
-		background-image: url('../../../static/imgs/bg.jpg');
+		background: url('../../../static/imgs/bg.jpg') center center;
 		background-size: cover;
 		-moz-background-size: cover;
 		-webkit-background-size: cover;
