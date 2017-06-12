@@ -9,15 +9,32 @@ var sendTest = function (req,res) {
 exports.sendTest = sendTest;
 
 var sendToRebot = function (req, res) {
-	console.log(req.query);
-	// console.log('rebot.js');
-	let res_Dev = res;
+	let postData = "";
+	req.on('data', function(data) {
+		postData += data;
+	});
+	req.on('end', function() {
+		getFromRebot(res, postData)
+	});
+	req.on('error', function (e) {
+		res.json({
+			code: 0,
+			msg: e.message,
+			time: new Date()
+		});
+	});
+}
+exports.sendToRebot = sendToRebot;
+
+var getFromRebot = function (res, data) {
+	let obj = querystring.parse(data);
 	let body = "";
 	let postdata = querystring.stringify({
 		key: config.rebot.key,
-		info: '你好啊，今天天气怎么样',
-		userid: '12345678'
+		info: obj.info,
+		userid: obj.userid
 	});
+	let res_Dev = res;
 	let options = {
 		host: 'www.tuling123.com',
 		port: 80,
@@ -28,19 +45,17 @@ var sendToRebot = function (req, res) {
 			"Content-Type": 'application/x-www-form-urlencoded', //这个一定要有
 		}
 	};
-	req = http.request(options, function (res) {
-		// console.log('STATUS: ' + res.statusCode);
-		// console.log('HEADERS: ' + JSON.stringify(res.headers));
+	let req = http.request(options, function (res) {
 		res.setEncoding('utf8');
 		res.on('data', function (chunk) {
 			body += chunk;
 			// console.log('BODY: ' + chunk);
 		});
 		res.on('end', function (res) {
-			// console.log(body);
+			console.log(JSON.parse(body).text);
 			res_Dev.json({
 				code: 1,
-				msg: body,
+				msg: JSON.parse(body).text,
 				time: new Date()
 			});
 		});
@@ -60,4 +75,4 @@ var sendToRebot = function (req, res) {
 	req.write(postdata);
 	req.end();
 }
-exports.sendToRebot = sendToRebot;
+exports.getFromRebot = getFromRebot;

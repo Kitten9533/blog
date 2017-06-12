@@ -6,10 +6,15 @@
 					<img class="to-user" src="/static/imgs/user.jpg"/>
 					<span class="to-user-name">聊天机器人</span>
 				</div>
-				<div class="chat-content">
-					<ul class="content-ul">
-						<li class="other"><img width="30" height="30" src="/static/imgs/user.jpg"><div>你好</div></li>
-						<li class="me"><div>Hello</div><img width="30" height="30" src="/static/imgs/default.png"></li>
+				<div class="chat-content" id="content" ref="content">
+					<ul class="content-ul" id="ul" ref="ul">
+						<li v-for="item in msgList" 
+							:class="{'other': item.user === 'rebot', 'me': item.user !== 'rebot'}">
+							<img v-if="item.user === 'rebot'" width="30" height="30" src="/static/imgs/user.jpg">
+							<div v-if="item.user === 'rebot'" v-text="item.info"></div>
+							<div v-if="item.user !== 'rebot'" v-text="item.info">Hello</div>
+							<img v-if="item.user !== 'rebot'" width="30" height="30" src="/static/imgs/default.png">
+						</li>
 					</ul>
 				</div>
 				<div class="chat-footer">
@@ -50,7 +55,7 @@
 		bottom: 110px;
 		right: 60px;
 		border: 1px solid rgba(92, 184, 92, 1);
-		height: 350px;
+		height: 450px;
 		width: 250px;
 		border-radius: 5px;
 		box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0px rgba(0, 0, 0, 0.3);
@@ -85,7 +90,7 @@
 		margin-left: 5px;	
 	}
 	.chat-content{
-		height: 268px;	
+		height: 368px;	
 		background: #fff;
 		overflow-y: auto;
 	}
@@ -102,7 +107,7 @@
 		border-radius: 5px;
 		clear: both;
 		position: relative;
-		max-width: 200px;
+		max-width: 180px;
 	}
 	.content-ul .other{
 		float: left;
@@ -112,6 +117,8 @@
 	}
 	.content-ul .other div{
 		position: relative;
+		font-size: 13px;
+		padding: 3px;
 	}
 	.content-ul .other div:after{
 		content: '';
@@ -140,8 +147,13 @@
 	}
 	.content-ul .me{
 		float: right;
-		border: 1px solid #ccc;
+		border: 1px solid rgba(92, 184, 92, 0.9);
 		right: 40px;
+		color: #fff;
+		background: rgba(92, 184, 92, 0.9);
+	}
+	.content-ul div{
+		word-wrap:break-word;white-space:normal;
 	}
 	.content-ul .me div{
 		position: relative;
@@ -153,7 +165,7 @@
 		width: 0;height: 0;
 		border-style: solid;
 		border-width: 5px;
-		border-color: transparent transparent transparent #ccc;
+		border-color: transparent transparent transparent rgba(92, 184, 92, 0.9);
 		top: -2px;
 		right: -13px;
 	}
@@ -225,17 +237,38 @@
 </style>
 
 <script>
+	import querystring from 'querystring'
 	export default{
 	  data () {
 	    return {
-	      showChat: true
+	      showChat: true,
+	      info: '',
+	      msgList: [{
+	        info: '你可以在这里畅所欲言~',
+	        user: 'rebot'
+	      }]
+	    }
+	  },
+	  watch: {
+	    msgList () {
+	      this.$nextTick(() => {
+	        let height = this.$refs.content.scrollHeight
+	        this.$refs.content.scrollTop = height
+	      })
 	    }
 	  },
 	  methods: {
 	    sendMsg () {
-	      this.$http.get('/api/sendToRebot?info=' + this.info + '&userid=1234567')
+	      if (!this.info) {
+	        return
+	      }
+	      this.msgList.push({'info': this.info, 'user': '123456'})
+	      let data = {info: this.info, userid: '123456'}
+	      this.info = ''
+	      this.axios.post('/api/sendToRebot', querystring.stringify(data))
 	        .then((response) => {
-	          console.log(response)
+	          console.log(response.data.msg)
+	          this.msgList.push({'info': response.data.msg, 'user': 'rebot'})
 	        })
 	        .catch((reject) => {
 	          console.log(reject)

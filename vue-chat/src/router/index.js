@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Vuex from 'vuex'
-import VueResource from 'vue-resource'
+// import VueResource from 'vue-resource'
 // import Hello from '@/components/Hello'
 import Cover from '@/components/Cover'
 import Chat from '@/components/main/Chat'
@@ -12,7 +12,7 @@ import Upload2 from '@/components/main/Upload2'
 import Upload3 from '@/components/main/Upload3'
 import Index from '@/components/Responsive/index'
 
-Vue.use(VueResource)
+// Vue.use(VueResource)
 Vue.use(Router)
 Vue.use(Vuex)
 
