@@ -19,6 +19,8 @@ exports.sendTrailMail = sendTrailMail;
 
 var sendToRebot = function (req, res) {
 	console.log('colltrollers sendToRebot');
+	console.log(req.query);
+	console.log('----');
 	rebot.sendToRebot(req,res);
 }
 exports.sendToRebot = sendToRebot;

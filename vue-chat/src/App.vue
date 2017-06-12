@@ -32,6 +32,7 @@ window.onresize = () => {
 </script>
 
 <style>
+  @import '/static/css/iconfont.css';
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

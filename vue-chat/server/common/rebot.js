@@ -9,7 +9,8 @@ var sendTest = function (req,res) {
 exports.sendTest = sendTest;
 
 var sendToRebot = function (req, res) {
-	console.log('rebot.js');
+	console.log(req.query);
+	// console.log('rebot.js');
 	let res_Dev = res;
 	let body = "";
 	let postdata = querystring.stringify({
@@ -28,28 +29,34 @@ var sendToRebot = function (req, res) {
 		}
 	};
 	req = http.request(options, function (res) {
-		console.log('STATUS: ' + res.statusCode);
-		console.log('HEADERS: ' + JSON.stringify(res.headers));
+		// console.log('STATUS: ' + res.statusCode);
+		// console.log('HEADERS: ' + JSON.stringify(res.headers));
 		res.setEncoding('utf8');
 		res.on('data', function (chunk) {
 			body += chunk;
-			console.log('BODY: ' + chunk);
+			// console.log('BODY: ' + chunk);
 		});
 		res.on('end', function (res) {
-			console.log(body);
+			// console.log(body);
 			res_Dev.json({
 				code: 1,
-				msg: util.format('recive at %s,content %s', new Date(), body)
+				msg: body,
+				time: new Date()
 			});
 		});
 	});
 	req.on('error', function(e) { 
 		console.log('error');
 		console.log('problem with request: ' + e.message); 
+		res_Dev.json({
+			code: 0,
+			msg: e.message,
+			time: new Date()
+		});
 	});
 	 
 	// write data to request body 
-	console.log(postdata);
+	// console.log(postdata);
 	req.write(postdata);
 	req.end();
 }
