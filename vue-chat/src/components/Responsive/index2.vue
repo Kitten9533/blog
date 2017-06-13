@@ -1,8 +1,66 @@
 <template>
 <div class="fullHeight">
 <!-- 	<nav class="navbar navbar-default navbar-fixed-top"> -->
-	<navTemp></navTemp>
-	<router-view></router-view>
+	<navTmpl></navTmpl>
+	<div class="container-fluid minHeight fullHeight">
+		<div class="row bg fullHeight">
+			<div class="col-md-7 col-md-offset-5 noPadding fullHeight">
+				<div class="jumbotron fullHeight">
+					<div class="container jumbotron-box">
+						<div class="jumbotron-div">
+							<h1>Welocme</h1>
+						  	<p>What can we help you with</p>
+						  	<p><a class="btn btn-success btn-lg" href="#" role="button">Learn More</a></p>
+						  	<div class="input-group">
+							<input type="text" class="form-control" placeholder="Email Address" aria-describedby="basic-addon2" v-model="email" @keyup.13="sendEmail">
+							  <span class="input-group-addon btn" @click="sendEmail" id="basic-addon2">START YOUR TRIAL</span>
+							</div>
+							<transition name="fade">
+								<div v-if="showRes" ref="emailRes" :class="['alert', {'alert-success': emailRes.code}, {'alert-danger': !emailRes.code}]" role="alert" v-text="emailRes.msg">Send Successful</div>
+							</transition>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 column">
+				<h2>
+					Heading
+				</h2>
+				<p>
+					Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+				</p>
+				<p>
+					 <a class="btn" href="#">View details »</a>
+				</p>
+			</div>
+			<div class="col-md-4 column">
+				<h2>
+					Heading
+				</h2>
+				<p>
+					Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+				</p>
+				<p>
+					 <a class="btn" href="#">View details »</a>
+				</p>
+			</div>
+			<div class="col-md-4 column">
+				<h2>
+					Heading
+				</h2>
+				<p>
+					Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+				</p>
+				<p>
+					 <a class="btn" href="#">View details »</a>
+				</p>
+			</div>
+		</div>
+	</div>
 	<notice></notice>
 </div>
 </template>
@@ -118,7 +176,7 @@
 
 <script>
 	import notice from './notice.vue'
-	import navTemp from './nav.vue'
+	import navTmpl from './nav.vue'
 	export default{
 	  data () {
 	    return {
@@ -142,7 +200,7 @@
 	  },
 	  components: {
 	    notice: notice,
-	    navTemp: navTemp
+	    navTmpl: navTmpl
 	  },
 	  methods: {
 	    changeAcitve (index) {
@@ -161,13 +219,13 @@
 	      if (reg.test(this.email)) {
 	        // TODO调用发送邮件
 	        // let data = {email: this.email}
-	        this.$http.get('/api/send_trail_mail?email=' + this.email)
+	        this.$axios.get('/api/send_trail_mail?email=' + this.email)
 	          .then((response) => {
-	            this.emailRes = response.body
+	            this.emailRes = response.data
 	            this.hideEmailRes()
 	          })
 	          .catch((reject) => {
-	            this.emailRes = reject.body
+	            this.emailRes = reject.data
 	            this.hideEmailRes()
 	          })
 	      } else {

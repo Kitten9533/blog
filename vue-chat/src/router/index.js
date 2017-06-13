@@ -11,6 +11,10 @@ import Upload from '@/components/Upload'
 import Upload2 from '@/components/main/Upload2'
 import Upload3 from '@/components/main/Upload3'
 import Index from '@/components/Responsive/index'
+import Nav from '@/components/Responsive/nav'
+import Overview from '@/components/Responsive/overview'
+import Index2 from '@/components/Responsive/index2'
+import Echatrs from '@/components/Responsive/echarts'
 
 // Vue.use(VueResource)
 Vue.use(Router)
@@ -26,7 +30,34 @@ export default new Router({
     {
       path: '/',
       name: 'Index',
-      component: Index
+      component: Index,
+      redirect: '/overview',
+      children: [{
+        path: 'nav',
+        component: Nav
+      },
+      {
+        path: 'overview',
+        component: Overview
+      },
+      {
+        path: 'echarts',
+        component: Echatrs
+      }]
+    },
+    {
+      path: '*',
+      redirect: '/overview'
+    },
+    {
+      path: '/nav',
+      name: 'Nav',
+      component: Nav
+    },
+    {
+      path: '/',
+      name: 'Index2',
+      component: Index2
     },
     {
       path: '/chat',

@@ -22,7 +22,7 @@
 						<input class="send-content" type="text" name="content" @keyup.13="sendMsg" v-model="info"/>
 					</div>
 					<div class="send-right" @click="sendMsg">
-						<i class="iconfont icon-fasong send-btn"></i>
+						<i :class="['iconfont icon-fasong send-btn',{'color-ccc': waiting}]"></i>
 					</div>
 				</div>
 			</div>
@@ -52,11 +52,11 @@
 	.chat-div{
 		position: fixed;
 		z-index: 10;
-		bottom: 110px;
+		bottom: 100px;
 		right: 60px;
 		border: 1px solid rgba(92, 184, 92, 1);
 		height: 450px;
-		width: 250px;
+		width: 280px;
 		border-radius: 5px;
 		box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0px rgba(0, 0, 0, 0.3);
 		overflow: hidden;
@@ -97,7 +97,7 @@
 	.content-ul{
 		list-style: none;
 		width: 100%;
-		padding: 5px;
+		padding: 10px;
 	}
 	.content-ul li{
 		display: block;
@@ -210,10 +210,13 @@
 		color: #ccc;
 		transition: 0.3s ease-in-out;
 	}
+	.color-ccc{
+		color: #ccc !important;	
+	}
 	.notice{
 		background: rgba(92, 184, 92, 1);
-		height: 50px;
-		width: 50px;
+		height: 40px;
+		width: 40px;
 		position: fixed;
 		right: 60px;
 		bottom: 50px;
@@ -222,15 +225,17 @@
 	}
 	.notice:hover{
 		transform: rotateZ(360deg);
+		background: rgb(78, 156, 78);
 		position: cursor;
+		opacity: 0.9;
 		transition: 0.3s ease-in-out;
 	}
 	.glyphicon-info-sign{
-		font-size: 33px;
-		width: 50px;
-		height: 50px;
+		font-size: 25px;
+		width: 40px;
+		height: 40px;
 		color: #fff;
-		line-height: 50px;
+		line-height: 40px;
 		text-align: center;
 		cursor: pointer;
 	}
@@ -241,8 +246,9 @@
 	export default{
 	  data () {
 	    return {
-	      showChat: true,
+	      showChat: false,
 	      info: '',
+	      waiting: false,
 	      msgList: [{
 	        info: '你可以在这里畅所欲言~',
 	        user: 'rebot'
@@ -262,16 +268,18 @@
 	      if (!this.info) {
 	        return
 	      }
+	      this.waiting = true
 	      this.msgList.push({'info': this.info, 'user': '123456'})
 	      let data = {info: this.info, userid: '123456'}
 	      this.info = ''
-	      this.axios.post('/api/sendToRebot', querystring.stringify(data))
+	      this.$axios.post('/api/sendToRebot', querystring.stringify(data))
 	        .then((response) => {
-	          console.log(response.data.msg)
+	          // console.log(response.data.msg)
+	          this.waiting = false
 	          this.msgList.push({'info': response.data.msg, 'user': 'rebot'})
 	        })
 	        .catch((reject) => {
-	          console.log(reject)
+	          // console.log(response.data,msg)
 	        })
 	    }
 	  }
