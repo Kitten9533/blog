@@ -15,6 +15,9 @@ var config  = {
 	},
 	rebot: {
 		key: '7e4a79e3e5fc4f63b7d87d68e5802bc8'
+	},
+	mongoose: {
+		db: 'mongodb://127.0.0.1/vue'
 	}
 }
 

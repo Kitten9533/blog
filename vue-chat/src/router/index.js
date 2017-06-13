@@ -15,6 +15,8 @@ import Nav from '@/components/Responsive/nav'
 import Overview from '@/components/Responsive/overview'
 import Index2 from '@/components/Responsive/index2'
 import Echatrs from '@/components/Responsive/echarts'
+import Register from '@/components/Responsive/register'
+import Login from '@/components/Responsive/login'
 
 // Vue.use(VueResource)
 Vue.use(Router)
@@ -43,6 +45,14 @@ export default new Router({
       {
         path: 'echarts',
         component: Echatrs
+      },
+      {
+        path: 'register',
+        component: Register
+      },
+      {
+        path: 'login',
+        component: Login
       }]
     },
     {

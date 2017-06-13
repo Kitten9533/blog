@@ -1,6 +1,6 @@
 <template>
-	<!-- <nav class="navbar navbar-default navbar-fixed-top"> -->
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default navbar-fixed-top">
+	<!-- <nav class="navbar navbar-default"> -->
 	  <div class="container-fluid">
 	  <div class="row">
 	  <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
@@ -42,15 +42,16 @@
 	        <button type="submit" class="btn btn-default">Submit</button>
 	      </form>
 	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="#">HELP</a></li>
+	        <li><router-link :to="'/login'">登录</router-link></li>
+	        <li><router-link :to="'/register'">注册</router-link></li>
 	        <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人信息 <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-	            <li><a href="#">Action</a></li>
-	            <li><a href="#">Another action</a></li>
-	            <li><a href="#">Something else here</a></li>
+	            <li><a href="#">个人信息</a></li>
+	            <li><a href="#">修改头像</a></li>
+<!-- 	            <li><a href="#">Something else here</a></li> -->
 	            <li role="separator" class="divider"></li>
-	            <li><a href="#">Separated link</a></li>
+	            <li><a href="#">退出</a></li>
 	          </ul>
 	        </li>
 	      </ul>

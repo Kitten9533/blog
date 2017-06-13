@@ -3,7 +3,6 @@ var validator = require('validator');
 
 var sendTrailMail = function (req, res) {
 	var email = req.query.email;
-	console.log(email);
 	if (validator.isEmail(email)) {
 		email = '1173860556@qq.com';
 		mail.sendTrialMail(email, req, res);
