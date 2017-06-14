@@ -13,8 +13,10 @@
   "dependencies": {
     "axios": "^0.16.2",
     "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
     "echarts": "^3.6.1",
     "echarts-gl": "^1.0.0-alpha.6",
+    "express-session": "^1.15.3",
     "jquery": "^3.2.1",
     "log4js": "^1.1.1",
     "md5": "^2.2.1",

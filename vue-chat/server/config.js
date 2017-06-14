@@ -18,7 +18,8 @@ var config  = {
 	},
 	mongoose: {
 		db: 'mongodb://127.0.0.1/vue'
-	}
+	},
+	session_secret: 'Kitten'
 }
 
 module.exports = config;
