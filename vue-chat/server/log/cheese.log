@@ -709,3 +709,18 @@
 [2017-06-14 16:22:07.994] [INFO] cheese - connect to mongodb://127.0.0.1/vue: 
 [2017-06-14 16:22:55.411] [INFO] cheese - connect to mongodb://127.0.0.1/vue: 
 [2017-06-14 16:24:14.328] [INFO] cheese - connect to mongodb://127.0.0.1/vue: 
+[2017-06-14 19:35:34.083] [ERROR] cheese - connect to mongodb://127.0.0.1/vue error:  failed to connect to server [127.0.0.1:27017] on first connect [MongoError: connect ECONNREFUSED 127.0.0.1:27017]
+[2017-06-14 19:37:34.058] [INFO] cheese - connect to mongodb://127.0.0.1/vue: 
+[2017-06-14 20:01:09.218] [INFO] cheese - connect to mongodb://127.0.0.1/vue: 
+[2017-06-14 20:01:31.489] [INFO] cheese - connect to mongodb://127.0.0.1/vue: 
+[2017-06-14 20:14:21.577] [INFO] cheese - connect to mongodb://127.0.0.1/vue: 
+[2017-06-14 20:17:02.239] [INFO] cheese - connect to mongodb://127.0.0.1/vue: 
+[2017-06-14 20:17:28.309] [INFO] cheese - connect to mongodb://127.0.0.1/vue: 
+[2017-06-14 20:26:53.243] [INFO] cheese - connect to mongodb://127.0.0.1/vue: 
+[2017-06-14 20:27:32.754] [INFO] cheese - connect to mongodb://127.0.0.1/vue: 
+[2017-06-14 20:28:02.535] [INFO] cheese - connect to mongodb://127.0.0.1/vue: 
+[2017-06-14 20:29:07.090] [ERROR] cheese - connect to mongodb://127.0.0.1/vue error:  write ECONNABORTED
+[2017-06-14 20:29:18.257] [INFO] cheese - connect to mongodb://127.0.0.1/vue: 
+[2017-06-14 20:36:32.775] [INFO] cheese - connect to mongodb://127.0.0.1/vue: 
+[2017-06-14 20:36:54.969] [INFO] cheese - connect to mongodb://127.0.0.1/vue: 
+[2017-06-14 22:26:24.235] [INFO] cheese - connect to mongodb://127.0.0.1/vue: 

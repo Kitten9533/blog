@@ -14,9 +14,6 @@ var registerUser = function (req, res) {
 		console.log(data);
 		let loginname = data.loginname;
 		let pass = data.pass;
-		console.log(req.session);
-		req.session.loginname = '3333';
-		console.log(req.session);
 		User.queryUserByLoginName(loginname, function (err, doc) {
 			if (err) {
 				tool.resBack(res, 0, err);
@@ -24,7 +21,7 @@ var registerUser = function (req, res) {
 			else {
 				if (!doc) {
 					// 用户不存在可以注册
-					addUser(res, loginname, pass);
+					addUser(req, res, loginname, pass);
 				}
 				else {
 					tool.resBack(res, 0, '该用户已注册');
@@ -38,13 +35,14 @@ var registerUser = function (req, res) {
 }
 exports.registerUser = registerUser;
 
-var addUser = function (res, loginname, pass) {
+var addUser = function (req, res, loginname, pass) {
 	User.addUser(loginname, pass, function (err, doc) {
 		if (err) {
 			tool.resBack(res, 0, err);
 		}
 		else {
 			if (doc) {
+				req.session.loginname = loginname;
 				tool.resBack(res, 1, '注册成功');
 			}
 			else {

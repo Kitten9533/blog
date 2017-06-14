@@ -5,22 +5,36 @@
 	            <form class="form-horizontal">
 	                <span class="heading">用户注册</span>
 	                <div class="form-group">
-	                    <input type="email" class="form-control" id="inputEmail3" placeholder="用户名或电子邮件">
+	                    <input type="email" class="form-control" placeholder="用户名或电子邮件" v-model="loginname">
 	                    <i class="fa fa-user"></i>
 	                </div>
 	                <div class="form-group help">
-	                    <input type="password" class="form-control" id="inputPassword3" placeholder="密　码">
+	                    <input type="password" class="form-control" placeholder="密　码" v-model="pass">
 	                    <i class="fa fa-lock"></i>
 	                    <a href="#" class="fa fa-question-circle"></a>
 	                </div>
 	                <div class="form-group help">
-	                    <input type="password" class="form-control" id="inputPassword3" placeholder="再次输入密码">
+	                    <input type="password" class="form-control" placeholder="再次输入密码" v-model="repass">
 	                    <i class="fa fa-lock"></i>
 	                    <a href="#" class="fa fa-question-circle"></a>
 	                </div>
 	                <div class="form-group">
 	                    <button type="submit" class="btn btn-default" @click.prevent="register">注册</button>
 	                </div>
+                    <transition name="fade">
+                        <div class="form-group help">
+                            <div v-show="showAlert" ref="emailRes" class="alert alert-danger" role="alert" v-html="!alertText ? '&nbsp;' : alertText"></div>
+                        </div>
+                    </transition>
+                    <div class="form-group help">
+                        <transition name="fade">
+                            <div class="progress" v-show="progress">
+                              <div class="progress-bar progress-bar-striped active" ref="progress" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                <span class="sr-only">100% Complete</span>
+                              </div>
+                            </div>
+                        </transition>
+                    </div>
 	            </form>
 	        </div>
 	    </div>
@@ -28,6 +42,12 @@
 </template>
 
 <style scoped>
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+    opacity: 0
+}
 .container{
 	padding-top: 100px;
 }
@@ -167,14 +187,47 @@
 import querystring from 'querystring'
 export default({
   data () {
-    return {}
+    return {
+      loginname: '',
+      pass: '',
+      repass: '',
+      showAlert: false,
+      alertText: '',
+      progress: false
+    }
   },
   methods: {
     register () {
-      let data = {loginname: 'aaa', pass: '123456'}
+      this.progress = false
+      if (!this.loginname) {
+        this.showAlert = true
+        this.alertText = '请输入用户名或电子邮箱'
+        return
+      }
+      if (this.pass !== this.repass) {
+        this.showAlert = true
+        this.alertText = '两次输入的密码不相同，请重试'
+        return
+      }
+      this.showAlert = false
+      this.alertText = ''
+      let data = {loginname: this.loginname, pass: this.pass}
+      let self = this
       this.$axios.post('/api/register', querystring.stringify(data))
         .then((response) => {
-          console.log(response)
+          if (response.data.code === 0) {
+            this.showAlert = true
+            this.alertText = response.data.msg
+          } else {
+            self.progress = true
+            self.$refs.progress.style.width = '100%'
+            setTimeout(function () {
+              self.progress = false
+              console.log(response.data)
+              alert(response.data.msg)
+              self.$router.push({path: '/overview'})
+            }, 1000)
+          }
         })
         .catch((reject) => {
           // console.log(response.data,msg)
