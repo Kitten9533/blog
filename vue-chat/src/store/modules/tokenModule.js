@@ -2,7 +2,7 @@ import * as types from '../types'
 export default{
   state: {
     test: 'tokenModule.test',
-    accessToken: ''
+    accessToken: 'aa'
   },
   mutations: {
     [types.LOGIN]: (state, accessToken) => {

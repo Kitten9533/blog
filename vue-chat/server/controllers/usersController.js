@@ -11,6 +11,8 @@ var registerUser = function (req, res) {
 		postData += data;
 	})
 	req.on('end' ,function () {
+		// authtoken
+		console.log(req.headers.authorization);
 		let data = querystring.parse(postData);
 		console.log(data);
 		let loginname = data.loginname;
