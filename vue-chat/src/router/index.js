@@ -17,12 +17,16 @@ import Index2 from '@/components/Responsive/index2'
 import Echatrs from '@/components/Responsive/echarts'
 import Register from '@/components/Responsive/register'
 import Login from '@/components/Responsive/login'
+import Userinfo from '@/components/Responsive/userinfo'
+import store from '@/store/store'
+
+console.log(store)
 
 // Vue.use(VueResource)
 Vue.use(Router)
 Vue.use(Vuex)
 
-export default new Router({
+const router = new Router({
   routes: [
     // {
     //   path: '/',
@@ -53,6 +57,13 @@ export default new Router({
       {
         path: 'login',
         component: Login
+      },
+      {
+        path: 'userinfo',
+        component: Userinfo,
+        meta: {
+          requireAuth: true// 添加该字段，表示进入这个路由是需要登录的
+        }
       }]
     },
     {
@@ -106,3 +117,20 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth) {
+    if (store.state.token.accessToken) {
+      next()
+    } else {
+      next({
+        path: '/login',
+        query: {redirect: to.fullPath}// 将跳转的路由path作为参数，登录成功后跳转到该路由
+      })
+    }
+  } else {
+    next()
+  }
+})
+
+export default router

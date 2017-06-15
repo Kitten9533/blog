@@ -19,7 +19,8 @@ var config  = {
 	mongoose: {
 		db: 'mongodb://127.0.0.1/vue'
 	},
-	session_secret: 'Kitten'
+	session_secret: 'Kitten',
+	key: 'hahaha'
 }
 
 module.exports = config;

@@ -47,7 +47,7 @@
 	        <li class="dropdown">
 	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">个人信息 <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-	            <li><a href="#">个人信息</a></li>
+	            <li><router-link :to="'/userinfo'">个人信息</router-link></li>
 	            <li><a href="#">修改头像</a></li>
 <!-- 	            <li><a href="#">Something else here</a></li> -->
 	            <li role="separator" class="divider"></li>

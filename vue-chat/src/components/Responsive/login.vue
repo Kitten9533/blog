@@ -4,22 +4,22 @@
 	        <div class="col-md-offset-3 col-md-6">
 	            <form class="form-horizontal">
 	                <span class="heading">用户登录</span>
-	                <div class="form-group">
-	                    <input type="email" class="form-control" id="inputEmail3" placeholder="用户名或电子邮件">
-	                    <i class="fa fa-user"></i>
-	                </div>
-	                <div class="form-group help">
-	                    <input type="password" class="form-control" id="inputPassword3" placeholder="密　码">
-	                    <i class="fa fa-lock"></i>
-	                    <a href="#" class="fa fa-question-circle"></a>
-	                </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="用户名或电子邮件" v-model="loginname">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div class="form-group help">
+                        <input type="password" class="form-control" placeholder="密　码" v-model="pass">
+                        <i class="fa fa-lock"></i>
+                        <a href="#" class="fa fa-question-circle"></a>
+                    </div>
 	                <div class="form-group">
 	                    <div class="main-checkbox">
 	                        <input type="checkbox" value="None" id="checkbox1" name="check"/>
 	                        <label for="checkbox1"></label>
 	                    </div>
 	                    <span class="text">Remember me</span>
-	                    <button type="submit" class="btn btn-default">登录</button>
+	                    <button type="submit" class="btn btn-default" @click.prevent="login">登录</button>
 	                </div>
 	            </form>
 	        </div>
@@ -161,9 +161,46 @@
 </style>
 
 <script>
-	export default({
-	  data () {
-	    return {}
-	  }
-	})
+// import {mapState} from 'vuex'
+require('vuex')
+import querystring from 'querystring'
+export default({
+  data () {
+    return {
+      loginname: '',
+      pass: ''
+    }
+  },
+  methods: {
+    login () {
+      if (!this.loginname) {
+        alert('请输入用户名或电子邮箱')
+        return
+      }
+      if (!this.pass) {
+        alert('请输入密码')
+        return
+      }
+      console.log(this.$store)
+      alert(this.$store.state.token.accessToken)
+      this.$store.commit(this.$types.LOGIN, '123')
+      alert(this.$store.state.token.accessToken)
+      let data = {loginname: this.loginname, pass: this.$aesEncrypt(this.pass)}
+      let self = this
+      console.log(data)
+      this.$axios.post('/api/login', querystring.stringify(data))
+        .then((response) => {
+          if (response.data.code === 0) {
+            console.log(response.data.msg)
+            console.log(self)
+          } else {
+            console.log('22')
+          }
+        })
+        .catch((reject) => {
+          // console.log(response.data,msg)
+        })
+    }
+  }
+})
 </script>

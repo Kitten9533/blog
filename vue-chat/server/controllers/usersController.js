@@ -2,6 +2,7 @@ var User 		= require('../proxy').User;
 var querystring = require('querystring');
 var util	    = require('util');
 var tool 		= require('../common/tool');
+var crypto		= require('../common/crypto');
 
 var registerUser = function (req, res) {
 	console.log('registerUser');
@@ -13,6 +14,7 @@ var registerUser = function (req, res) {
 		let data = querystring.parse(postData);
 		console.log(data);
 		let loginname = data.loginname;
+		// let pass = crypto.aesDecrypt(data.pass);
 		let pass = data.pass;
 		User.queryUserByLoginName(loginname, function (err, doc) {
 			if (err) {
@@ -52,3 +54,40 @@ var addUser = function (req, res, loginname, pass) {
 	})
 }
 exports.addUser = addUser;
+
+var login = function (req, res) {
+	console.log('login');
+	let postData = '';
+	req.on('data', function (data) {
+		postData += data;
+	})
+	req.on('end', function () {
+		let data = querystring.parse(postData);
+		let loginname = data.loginname;
+		let pass = data.pass;
+		User.login(loginname, pass, function (err, doc) {
+			if (err) {
+				tool.resBack(res, 0, err);
+			}
+			else {
+				if (doc) {
+					res.json({
+						code: 1,
+						msg: '登陆成功',
+						accessToken: doc.accessToken,
+						time: new Date()
+					});
+				}
+				else {
+					res.json({
+						code: 0,
+						msg: '登录失败，账号或密码错误',
+						accessToken: null,
+						time: new Date()
+					});
+				}
+			}
+		})
+	})
+}
+exports.login = login;

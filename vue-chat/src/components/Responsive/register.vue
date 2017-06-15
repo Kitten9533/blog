@@ -211,7 +211,7 @@ export default({
       }
       this.showAlert = false
       this.alertText = ''
-      let data = {loginname: this.loginname, pass: this.pass}
+      let data = {loginname: this.loginname, pass: this.$aesEncrypt(this.pass)}
       let self = this
       this.$axios.post('/api/register', querystring.stringify(data))
         .then((response) => {
