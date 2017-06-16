@@ -215,18 +215,19 @@ export default({
       let self = this
       this.$axios.post('/api/register', querystring.stringify(data))
         .then((response) => {
+          console.log(response)
           if (response.data.code === 0) {
             this.showAlert = true
             this.alertText = response.data.msg
           } else {
             self.progress = true
             self.$refs.progress.style.width = '100%'
-            setTimeout(function () {
-              self.progress = false
-              console.log(response.data)
-              alert(response.data.msg)
-              self.$router.push({path: '/overview'})
-            }, 1000)
+            // setTimeout(function () {
+            //   self.progress = false
+            //   console.log(response.data)
+            //   alert(response.data.msg)
+            //   self.$router.push({path: '/overview'})
+            // }, 1000)
           }
         })
         .catch((reject) => {
