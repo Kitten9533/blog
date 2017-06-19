@@ -6,6 +6,7 @@ exports.getToken = function (str) {
     let content = {accessToken: str};
     let token = jwt.sign(content, key, {
                         expiresIn: 60*60*24*7
+                        // expiresIn: 1
                     });
     return token;
 }

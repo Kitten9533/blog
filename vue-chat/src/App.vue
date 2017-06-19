@@ -18,14 +18,14 @@
 </style>
 
 <script>
-import store from './store/store'
+// import store from './store/store'
 export default {
   // data () {
   //   console.log(this.$aesEncrypt('hahah'))
   //   console.log(this.$aesDecrypt(this.$aesEncrypt('hahah')))
   //   return {}
   // },
-  store,
+  // store,
   name: 'app'
 }
 
@@ -41,8 +41,8 @@ export default {
 //   }, 500)
 // }
 
-window.onresize = () => {
-  store.commit('change')
-  // store.dispatch('setHeight')
-}
+// window.onresize = () => {
+//   store.commit('change')
+//   // store.dispatch('setHeight')
+// }
 </script>

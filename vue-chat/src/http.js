@@ -24,6 +24,11 @@ axios.interceptors.request.use(
 // http response 拦截器
 axios.interceptors.response.use(
   response => {
+    // 当返回 token信息时，覆盖token
+    if (response.status === 200) {
+      store.commit(types.LOGIN, response.data.accessToken)
+      console.log(store.state.token.accessToken)
+    }
     return response
   },
   error => {

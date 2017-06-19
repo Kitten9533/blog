@@ -6,6 +6,7 @@ import App from './App'
 import router from './router'
 import axios from './http'
 import crypto from 'crypto'
+// import store from './store/store'
 // import echarts from 'echarts'
 
 // import io from '../static/js/socket.io'
@@ -35,6 +36,8 @@ Vue.prototype.$aesDecrypt = function (encrypted) {
   return decrypted
 }
 Vue.prototype.$types = types
+
+// Vue.prototype.$store = store
 
 // Vue.prototype.$echarts = echarts
 // Vue.prototype.httpServer = io.connect('http://127.0.0.1:8010')

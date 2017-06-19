@@ -27,13 +27,26 @@ router.post('/login', usersController.login);
 // auth.verifyauth判断accesstoken是否过期,过期则重新登录
 // 继续执行，通过accesstoken查询数据库获取用户信息
 // 有相应匹配则返回该用户信息，否则，重定向到登录页
+
+// 其他查询、操作用户信息的
+// 
+// 
+
+
+// 用户登出时,传入accesstoken
+// auth.verifyauth判断accesstoken是否过期,过期则重新登录,也就不用继续执行
+
+// router.post('loginout', auth.verifyauth, usersController.loginOut);
 router.post('loginout', auth.verifyauth, function (req, res) {
-	res.json({
-		msg: '黑人问号？？'
+	return res.json({
+		code: 1,
+		msg: '退出成功',
+		accessToken: null,
+		time: new Date()
 	})
 })
 
-router.post('/userinfo', auth.verifyauth, function (req, res) {
+router.get('/userinfo', auth.verifyauth, function (req, res) {
 	res.redirect('/#/userinfo');
 })
 

@@ -120,6 +120,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth) {
+    alert(store.state.token.accessToken)
     if (store.state.token.accessToken) {
       next()
     } else {

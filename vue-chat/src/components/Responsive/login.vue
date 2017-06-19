@@ -162,7 +162,7 @@
 
 <script>
 // import {mapState} from 'vuex'
-require('vuex')
+// require('vuex')
 import querystring from 'querystring'
 export default({
   data () {
@@ -182,9 +182,9 @@ export default({
         return
       }
       console.log(this.$store)
-      alert(this.$store.state.token.accessToken)
-      this.$store.commit(this.$types.LOGIN, '123')
-      alert(this.$store.state.token.accessToken)
+      // alert(this.$store.state.token.accessToken)
+      // this.$store.commit(this.$types.LOGIN, '123')
+      // alert(this.$store.state.token.accessToken)
       let data = {loginname: this.loginname, pass: this.$aesEncrypt(this.pass)}
       let self = this
       console.log(data)

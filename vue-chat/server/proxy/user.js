@@ -22,3 +22,8 @@ exports.addUser = function (loginname, pass, callback) {
 exports.login = function (loginname, pass, callback) {
 	User.findOne({loginname: loginname, pass: pass}, callback);
 }
+
+//登录时发现token过期时 更新相应的token
+exports.updateToken = function (loginname, pass, token, callback) {
+	User.update({loginname : loginname, pass : pass}, {$set:{accessToken: token}}, callback);
+}
