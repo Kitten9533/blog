@@ -50,7 +50,8 @@ var registerUser = function (req, res) {
 exports.registerUser = registerUser;
 
 var addUser = function (req, res, loginname, pass) {
-	User.addUser(loginname, pass, function (err, doc) {
+	let token = authtoken.getToken(loginname);
+	User.addUser(loginname, pass, token, function (err, doc) {
 		if (err) {
 			return res.json({
 				code: 0,
@@ -64,7 +65,7 @@ var addUser = function (req, res, loginname, pass) {
 				return res.json({
 					code: 1,
 					msg: '注册成功',
-					accessToken: doc.accessToken,
+					accessToken: token,
 					time: new Date()
 				});
 			}
@@ -126,12 +127,13 @@ var login = function (req, res) {
 								})
 							}
 							else {
-								console.log('update')
+								console.log('-----update---');
 								console.log(doc);
+								console.log('--------------');
 								return res.json({
 									code: 1,
 									msg: '登陆成功',
-									accessToken: doc.accessToken,
+									accessToken: newToken,
 									time: new Date()
 								});
 							}

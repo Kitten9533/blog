@@ -12,9 +12,7 @@ exports.queryUser = function (callback) {
 }
 
 // 注册时给每个用户生成一个accesstoken,有效期为7天
-exports.addUser = function (loginname, pass, callback) {
-	// 生成accessToken并存入数据库
-	let token = authtoken.getToken(loginname);
+exports.addUser = function (loginname, pass, token, callback) {
 	User.create({loginname: loginname, pass: pass, accessToken: token}, callback);
 }
 
